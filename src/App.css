@@ -1,0 +1,107 @@
+.App {
+  text-align: center;
+
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 3em;
+}
+
+.App-intro {
+  font-size: xx-large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+body {
+    background-color:darkolivegreen;
+}
+
+.Card {
+  display:inline-block;
+  color:black;
+  border:5px solid black;
+  background-color: white;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  cursor:pointer;
+  width: 80px;
+  text-align: center;
+  line-height: 120px;
+  margin: 10px;
+  font-size: xx-large;
+  border-radius: 5px;
+}
+
+.faceDownCard {
+    display:inline-block;
+    color:black;
+    border:5px solid black;
+    background: #36c;
+    background:
+            linear-gradient(115deg, transparent 75%, rgba(255,255,255,.8) 75%) 0 0,
+            linear-gradient(245deg, transparent 75%, rgba(255,255,255,.8) 75%) 0 0,
+            linear-gradient(115deg, transparent 75%, rgba(255,255,255,.8) 75%) 7px -15px,
+            linear-gradient(245deg, transparent 75%, rgba(255,255,255,.8) 75%) 7px -15px,
+            #36c;
+    background-size: 15px 30px;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    cursor:pointer;
+    width: 80px;
+    text-align: center;
+    line-height: 120px;
+    margin: 10px;
+    font-size: xx-large;
+    border-radius: 5px;
+}
+
+.selectedCard {
+    display:inline-block;
+    color:black;
+    border:5px solid #f44336;
+    background-color:white;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    cursor:pointer;
+    width: 80px;
+    text-align: center;
+    line-height: 120px;
+    margin: 10px;
+    font-size: xx-large;
+    border-radius: 5px;
+}
+
+
+.Card:active {
+  /*color:red;*/
+  box-shadow: 0 0 20px -1px rgba(0,0,0,0.6);
+}
+.BigCard {
+    display:inline-block;
+    color:black;
+    border:5px solid black;
+    background-color: white;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    cursor:pointer;
+    width: 80px;
+    text-align: center;
+    line-height: 120px;
+    margin: 10px;
+    font-size: xx-large;
+    padding: 10px;
+    border-radius: 5px;
+}
+
