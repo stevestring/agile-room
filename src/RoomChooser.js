@@ -11,12 +11,14 @@ export default class RoomChooser extends React.Component{
   
 
     handleChange(event) {
-        this.setState({room: event.target.value});
-        this.props.onChange(event.target.value);
+        // this.setState({room: event.target.value});
     }
     
     handleSubmit(event) {
-        alert('A room was submitted: ' + this.state.room);
+        const data = new FormData(event.target);
+        // alert(data.get('room'));
+        this.setState({room: data.get('room')});
+        this.props.onChange(data.get('room'));
     }
 
 
@@ -24,18 +26,25 @@ export default class RoomChooser extends React.Component{
         if (this.state.room==null) {
             return (
                 <div>
-                <label>
-                    Enter room: 
-                    <input type="text" value={this.state.room} onChange={this.handleChange} />
-                </label>
-                <input type="submit" value="Submit" />
+                    <form onSubmit={this.handleSubmit}>
+                    <p className="App-intro"> 
+                        <label>
+                            Enter room: 
+                            <input name="room" type="text" value={this.state.room} onChange={this.handleChange} />
+                            
+                        </label>
+                        <input type="submit" value="Submit"  />
+                    </p>
+                    </form>
                 </div>
             );
         }
         else {
             return (
                 <div>
+                    <p className="App-intro"> 
                    Room: {this.state.room}
+                   </p>
                 </div>
             );
         }

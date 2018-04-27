@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Card from "./Card";
 import RoomChooser from "./RoomChooser";
+import PlayedCards from "./PlayedCards";
 import axios from 'axios';
 var settings = require( './settings');
 
@@ -8,7 +9,6 @@ export default class PlayerHand extends React.Component{
     constructor(props) {
         super(props);
         this.state = {room: null, player: null,selectedCard:null};
-        this.handleClick = this.handleClick.bind(this);
         this.handleRoomChange = this.handleRoomChange.bind(this);
     }
 
@@ -36,6 +36,11 @@ export default class PlayerHand extends React.Component{
         , 1000 * 2)
     }
 
+    handleRoomChange(event)
+    {
+        this.setState({room: event});
+    }
+
     loadData(){
 
         if (this.state.room !=null)
@@ -52,10 +57,6 @@ export default class PlayerHand extends React.Component{
             // alert(this.state.selectedCard);
     }
 
-    handleRoomChange(event)
-    {
-        this.setState({room: event});
-    }
 
     render() {
         {/* TODO: Move userPrompt out of component */}
@@ -73,9 +74,11 @@ export default class PlayerHand extends React.Component{
         return (
             <div>
                 <br/>
-                <p className="App-intro">
+                
                     <RoomChooser onChange={this.handleRoomChange}/>  
-                </p> 
+                    
+                {/* TODO: Show played cards - need to break down component*/}
+                {/* <PlayedCards></PlayedCards> */}
                 <p className="App-intro">             
                     {userPrompt}
                 </p>   
