@@ -14,13 +14,18 @@ class Dealer extends Component {
   }
 
   render() {
+
+    const inRoom = this.state.room != null;
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Planning Poker - Dealer</h1>
         </header>
         <RoomChooser onChange={this.handleRoomChange}/>
-      <PlayedCards room={this.state.room}/>
+        
+        {inRoom?(
+        <PlayedCards room={this.state.room}/>):(<label/>)}
+        
       </div>
     );
   }
