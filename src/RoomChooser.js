@@ -33,7 +33,7 @@ export default class RoomChooser extends React.Component{
                             <input name="room" type="text" value={this.state.room} onChange={this.handleChange} />
                             
                         </label>
-                        <input type="submit" value="Submit"  />
+                        <input type="submit" value="Go"  />
                     </p>
                     </form>
                 </div>
