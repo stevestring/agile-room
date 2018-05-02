@@ -8,14 +8,16 @@ var settings = require( './settings');
 export default class PlayerHand extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {room: null, player: null,selectedCard:null};
+        this.state = {selectedCard:null, player: Math.floor(Math.random()*1000)};
         this.handleRoomChange = this.handleRoomChange.bind(this);
     }
 
     handleClick(param, e)  {
         this.setState({text: param,selectedCard:param});
 
-        axios.put((settings.serverurl+'/player-card/'+this.state.room +'/'+this.state.player), ({Card: param}))
+        if (this.state.player !=  null)
+        {
+        axios.put((settings.serverurl+'/player-card/'+this.props.room +'/'+this.state.player), ({Card: param}))
             .then(function (response) {
                 console.log(response);
             })
@@ -23,14 +25,13 @@ export default class PlayerHand extends React.Component{
                 console.log(error);
                 alert (error);
             });
+        }
     }
 
     componentDidMount(){
 
+        
         this.loadData();
-
-        this.setState({player: Math.floor(Math.random()*1000)});
-
         this.interval = setInterval(() => {
             this.loadData()}
         , 1000 * 2)
@@ -43,18 +44,19 @@ export default class PlayerHand extends React.Component{
 
     loadData(){
 
-        if (this.state.room !=null)
+        if (this.props.room !=null)
         {
-            axios.get(settings.serverurl+'/player-card/'+ this.state.room +'/'+ this.state.player)
+            axios.get(settings.serverurl+'/player-card/'+ this.props.room +'/'+ this.state.player)
                 .then(res => {
                     if (res.data.Card==null)
                     {
+
                         this.setState({  selectedCard:null })
                     }
                 })
                 .catch(err => console.log(err))
         }
-            // alert(this.state.selectedCard);
+
     }
 
 
@@ -75,14 +77,14 @@ export default class PlayerHand extends React.Component{
             <div>
                 <br/>
                 
-                    <RoomChooser onChange={this.handleRoomChange}/>  
+                    {/* <RoomChooser onChange={this.handleRoomChange}/>   */}
                     
                 {/* TODO: Show played cards - need to break down component*/}
                 {/* <PlayedCards></PlayedCards> */}
-                <p className="App-intro">             
+                <p className="App-title">             
                     {userPrompt}
                 </p>   
-                <h1>{this.state.player}</h1>
+                {/* <h1>{this.state.player}</h1> */}
                 <div/>
                 <Card selectedCard={this.state.selectedCard} text = '1/2' onClick={(e) => this.handleClick( '1/2')}/>
                 <Card selectedCard={this.state.selectedCard} text = '1' onClick={(e) => this.handleClick( '1')}/>
