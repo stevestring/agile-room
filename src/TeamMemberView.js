@@ -10,36 +10,22 @@ class TeamMemberView extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {room:0 };
-    this.handleRoomChange = this.handleRoomChange.bind(this);
   }
 
   render() {
 
-    const inRoom = this.state.room != 0;
-    alert ("render:" + this.state.room + ":" + inRoom);
+
     return (
       
       <div className="App">
               
-        {inRoom?(<div><RoomHeader room={this.state.room}/>
+       <RoomHeader room={this.props.room}/>
         <header className="App-header">
           <h1 className="App-title">Planning Poker</h1>
-        </header><PlayerHand room={this.state.room}></PlayerHand></div>):(<div> <header className="App-header">
-          <h1 className="App-title">Main Lobby</h1>
-        </header><RoomChooser onChangeRoom={this.handleRoomChange}/></div>)}
-        
-      </div>
+        </header><PlayerHand room={this.props.room}></PlayerHand></div>
     );
   }
 
-  handleRoomChange(event)
-  {
-      alert("roomchangeevent:" + event);
-      this.setState({room: event});
-     
-      
-  }
 
 }
 

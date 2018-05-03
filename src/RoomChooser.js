@@ -31,7 +31,7 @@ export default class RoomChooser extends React.Component{
         this.setState({room: this.state.room});
         alert(this.state.room);
         this.props.onChangeRoom(this.state.room);
-        event.stopPropagation();
+        
     }
 
 

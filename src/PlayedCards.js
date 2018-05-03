@@ -28,10 +28,10 @@ export default class PlayedCards extends React.Component{
     }
     newHand()
     {
-        this.setState({ cards:[], faceDown:true });
+        
         axios.delete(settings.serverurl +'/hand/' +this.props.room)
             .catch(err => alert(err));
-
+        this.setState({ cards:[], faceDown:true });
         
     }
 

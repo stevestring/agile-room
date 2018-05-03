@@ -13,7 +13,7 @@ export default class PlayerHand extends React.Component{
     }
 
     handleClick(param, e)  {
-        this.setState({text: param,selectedCard:param});
+        
 
         if (this.state.player !=  null)
         {
@@ -26,6 +26,8 @@ export default class PlayerHand extends React.Component{
                 alert (error);
             });
         }
+        this.setState({text: param,selectedCard:param});
+        
     }
 
     componentDidMount(){

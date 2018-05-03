@@ -18,18 +18,20 @@ class App extends Component {
 <Grid>
 <br/>
   <Row className="show-grid">
-  <Col md={3} mdPush={3}/>
-    <Col md={3} mdPush={3}>
+
+
+  
+  <Col sm={6} md={6} mdPush={6}>
 
         
-        <Thumbnail href="/team"  src="/Team.jpg">
+        <Thumbnail href="/lobby"  src="/Team.jpg" responsive >
                     <h3>
                     Team Member  
         </h3> 
         </Thumbnail>
-    </Col>
-    <Col md={3} mdPull={3}>
-    <Thumbnail href="/dealer"  src="/Facilitator.jpg">
+        </Col>
+    <Col sm={6} md={6} mdPull={6}>
+    <Thumbnail href="/dealer"  src="/Facilitator.jpg"  responsive >
                     <h3>
                     Facilitator 
         </h3> 
@@ -37,11 +39,6 @@ class App extends Component {
     </Col>
   </Row>
 </Grid>
-
-
-
-
-
 
       </div>
     );
