@@ -24,14 +24,14 @@ class App extends Component {
   <Col sm={6} md={6} mdPush={6}>
 
         
-        <Thumbnail href="/lobby"  src="/Team.jpg" responsive >
+        <Thumbnail href="/lobby"  src="/Team.jpg" responsive ="true" >
                     <h3>
                     Team Member  
         </h3> 
         </Thumbnail>
         </Col>
     <Col sm={6} md={6} mdPull={6}>
-    <Thumbnail href="/dealer"  src="/Facilitator.jpg"  responsive >
+    <Thumbnail href="/dealer"  src="/Facilitator.jpg"  responsive="true" >
                     <h3>
                     Facilitator 
         </h3> 
@@ -42,8 +42,8 @@ class App extends Component {
 
       </div>
     );
-  }
-}
+  };
+};
 
 
 export default App;
