@@ -31,7 +31,7 @@ class App extends Component {
         </Thumbnail>
         </Col>
     <Col sm={3} md={3} mdPull={3}>
-    <Thumbnail href="/dealer"  src="/Facilitator.jpg"  responsive="true" >
+    <Thumbnail href="/create-room"  src="/Facilitator.jpg"  responsive="true" >
                     <h3>
                     Facilitator 
         </h3> 
