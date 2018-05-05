@@ -42,22 +42,19 @@ class Lobby extends Component {
                     </FormGroup>{' '}
                     <Button bsSize="lg" type="submit">Go</Button>
                 </Form>
-
-                    </Grid>
+             </Grid>
       </div>
     );
   }
 
   handleChange(event)
   {
-      //alert ("room changed")
+
       this.setState({room: event.target.value});
       
   }
   handleSubmit(event) {
-    // alert ("form submit");
-    // alert ("~/room/"+this.state.room);
-    //window.location.href ="/room/"+this.state.room; 
+
     this.props.history.push("/room/"+this.state.room);
     
 }
