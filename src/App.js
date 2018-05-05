@@ -20,17 +20,17 @@ class App extends Component {
   <Row className="show-grid">
 
 
-  
-  <Col sm={6} md={6} mdPush={6}>
+  <Col xs={3} sm={3} md={3} mdPush={3}/>
+  <Col sm={3} md={3} mdPush={3}>
 
         
         <Thumbnail href="/lobby"  src="/Team.jpg" responsive ="true" >
                     <h3>
-                    Team Member  
+                    Team  
         </h3> 
         </Thumbnail>
         </Col>
-    <Col sm={6} md={6} mdPull={6}>
+    <Col sm={3} md={3} mdPull={3}>
     <Thumbnail href="/dealer"  src="/Facilitator.jpg"  responsive="true" >
                     <h3>
                     Facilitator 
