@@ -17,7 +17,7 @@ export default class PlayerHand extends React.Component{
 
         if (this.state.player !=  null)
         {
-        axios.put((settings.serverurl+'/player-card/'+this.props.room +'/'+this.state.player), ({Card: param}))
+        axios.put((settings.serverurl+'/player-input/'+this.props.room +'/'+this.state.player), ({Card: param}))
             .then(function (response) {
                 console.log(response);
             })
@@ -48,7 +48,7 @@ export default class PlayerHand extends React.Component{
 
         if (this.props.room !=null)
         {
-            axios.get(settings.serverurl+'/player-card/'+ this.props.room +'/'+ this.state.player)
+            axios.get(settings.serverurl+'/player-input/'+ this.props.room +'/'+ this.state.player)
                 .then(res => {
                     if (res.data.Card==null)
                     {

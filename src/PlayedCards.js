@@ -16,7 +16,7 @@ export default class PlayedCards extends React.Component{
 
         if (this.props.room != null)
         {
-            axios.get(settings.serverurl+'/hand/'+this.props.room )
+            axios.get(settings.serverurl+'/player-inputs/'+this.props.room )
                 .then(res => this.setState({ cards:res.data.Items }))
                 .catch(err => console.log(err));
         }
@@ -29,7 +29,7 @@ export default class PlayedCards extends React.Component{
     newHand()
     {
         
-        axios.delete(settings.serverurl +'/hand/' +this.props.room)
+        axios.delete(settings.serverurl +'/player-inputs/' +this.props.room)
             .catch(err => alert(err));
         this.setState({ cards:[], faceDown:true });
         
