@@ -8,7 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Lobby from './Lobby';
 import CreateRoom from './CreateRoom';
-
+import NavBar from "./NavBar";
 
 ReactDOM.render((
     <Router>

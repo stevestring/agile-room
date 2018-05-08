@@ -8,7 +8,7 @@ var settings = require( './settings');
 export default class PlayerHand extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {selectedCard:null, player: Math.floor(Math.random()*1000)};
+        this.state = {selectedCard:null, player: Math.floor(Math.random()*1000), lastMessageId:null};
         this.handleRoomChange = this.handleRoomChange.bind(this);
     }
 
@@ -17,14 +17,14 @@ export default class PlayerHand extends React.Component{
 
         if (this.state.player !=  null)
         {
-        axios.put((settings.serverurl+'/player-input/'+this.props.room +'/'+this.state.player), ({Card: param}))
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-                alert (error);
-            });
+            axios.put((settings.serverurl+'/player-input/'+this.props.room +'/'+this.state.player), ({Card: param}))
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert (error);
+                });
         }
         this.setState({text: param,selectedCard:param});
         
@@ -48,16 +48,36 @@ export default class PlayerHand extends React.Component{
 
         if (this.props.room !=null)
         {
-            axios.get(settings.serverurl+'/player-input/'+ this.props.room +'/'+ this.state.player)
+            axios.get(settings.serverurl+'/room/'+ this.props.room )
                 .then(res => {
-                    if (res.data.Card==null)
-                    {
 
-                        this.setState({  selectedCard:null })
+                    // alert(res.data.MessageId +";"+ this.state.lastMessageId);
+                    if (res.data.MessageId != this.state.lastMessageId ){ //Is there a new message
+                        
+                        if (res.data.Message=="NH") //New Hand
+                        {
+
+                            this.setState({  selectedCard:null, lastMessageId : res.data.MessageId})//We processed the message
+                        }
+                            
                     }
                 })
                 .catch(err => console.log(err))
         }
+
+        // if (this.props.room !=null)
+        // {
+        //     axios.get(settings.serverurl+'/player-input/'+ this.props.room +'/'+ this.state.player)
+        //         .then(res => {
+        //             if (res.data.Card==null)
+        //             {
+
+        //                 this.setState({  selectedCard:null })
+        //             }
+        //         })
+        //         .catch(err => console.log(err))
+        // }
+        
 
     }
 

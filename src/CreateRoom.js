@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Cards from './PlayerHand.js';
 import PlayedCards from "./PlayedCards";
 import axios from "axios/index";
-import RoomChooser from "./RoomChooser";
+import NavBar from "./NavBar";
 import RoomHeader from "./RoomHeader";
 import './bootstrap.min.css';
 import './App.css';
@@ -16,6 +16,7 @@ import { HelpBlock } from 'react-bootstrap';
 import { Grid } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
+import { PageHeader } from 'react-bootstrap';
 var settings = require( './settings');
 
 
@@ -66,25 +67,41 @@ handleSubmit(event) {
     
     return (
       <div className="App">
-      <RoomHeader room={this.state.room}/>
-        <header className="App-header">
-          <h1 className="App-title">Create a Room</h1>
-        </header>
-        <br/>
+      <NavBar room = {this.state.room}/>
+      <p className="App-title">             
+                    Create a Room
+                </p>   
+                <br/>
         <Grid>
-                
-                <Form inline onSubmit={this.handleSubmit}>
-                    <FormGroup controlId="room" bsSize="lg">
-                    <ControlLabel>Room Name</ControlLabel>
-                        <FormControl type="text" name="roomName" placeholder="Enter room name" onChange={this.handleRoomNameChange}/>
-                        <ControlLabel>Room Activity</ControlLabel>
-                      <FormControl componentClass="select" placeholder="Planning Poker" onChange={this.handleActivityChange}>
-                        <option value="pp">Planning Poker</option>
-                        <option value="ff">Fist Of Five</option>
-                      </FormControl>
-                    </FormGroup>{' '}
-                    <Button bsSize="lg" type="submit">OK</Button>
-                </Form>
+        <Form horizontal onSubmit={this.handleSubmit}>
+          <FormGroup controlId="formHorizontalEmail" >
+            <Col componentClass={ControlLabel} sm={4}>
+            Room Name
+            </Col>
+            <Col sm={4}>
+              <FormControl type="text" placeholder="Enter room name... " onChange={this.handleRoomNameChange}/>
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="formHorizontalPassword">
+            <Col componentClass={ControlLabel} sm={4}>
+              Starting Activity
+            </Col>
+            <Col sm={4}>
+            <FormControl componentClass="select" placeholder="Planning Poker" onChange={this.handleActivityChange}>
+                                <option value="pp">Planning Poker</option>
+                                <option value="ff">Fist Of Five</option>
+                              </FormControl>
+            </Col>
+          </FormGroup>
+
+          <FormGroup style={{textAlign: "left"}}>
+            <Col smOffset={4} sm={4}>
+              <Button type="submit">OK</Button>
+            </Col>
+          </FormGroup>
+      </Form>
+
         </Grid>
       </div>
     );

@@ -7,21 +7,23 @@ import { Grid } from 'react-bootstrap';
 import { Thumbnail } from 'react-bootstrap';
 import './bootstrap.min.css';
 import './App.css';
+import NavBar from "./NavBar";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+      <NavBar/>
+        {/* <header className="App-header">
           <h1 className="App-title">Agile Room</h1>
-        </header>
+        </header> */}
 <Grid>
 <br/>
   <Row className="show-grid">
 
 
-  <Col xs={3} sm={3} md={3} mdPush={3}/>
-  <Col sm={3} md={3} mdPush={3}>
+  <Col xs={0} sm={3} md={3} mdPush={3}/>
+  <Col xs={6} sm={3} md={3} mdPush={3}>
 
         
         <Thumbnail href="/lobby"  src="/Team.jpg" responsive ="true" >
@@ -30,7 +32,7 @@ class App extends Component {
         </h3> 
         </Thumbnail>
         </Col>
-    <Col sm={3} md={3} mdPull={3}>
+    <Col xs={6} sm={3} md={3} mdPull={3}>
     <Thumbnail href="/create-room"  src="/Facilitator.jpg"  responsive="true" >
                     <h3>
                     Facilitator 

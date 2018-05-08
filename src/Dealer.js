@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import Cards from './PlayerHand.js';
 import PlayedCards from "./PlayedCards";
 import axios from "axios/index";
-import RoomChooser from "./RoomChooser";
-import RoomHeader from "./RoomHeader";
+import NavBar from "./NavBar";
 import './bootstrap.min.css';
 import './App.css';
 class Dealer extends Component {
@@ -18,13 +17,13 @@ class Dealer extends Component {
     
     return (
       <div className="App">
-      <RoomHeader room={this.props.room}/>
-        <header className="App-header">
+      <NavBar room={this.props.room}/>
+        {/* <header className="App-header">
           <h1 className="App-title">Planning Poker - Dealer</h1>
-        </header>
+        </header> */}
         <br/>
 
-        <PlayedCards room={this.props.room}/>
+        <PlayedCards room={this.props.room} roomstate="0"/>
         
       </div>
     );

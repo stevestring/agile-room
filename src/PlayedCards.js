@@ -29,8 +29,14 @@ export default class PlayedCards extends React.Component{
     newHand()
     {
         
+        //delete user card?  TODO: Is this necessary?
         axios.delete(settings.serverurl +'/player-inputs/' +this.props.room)
             .catch(err => alert(err));
+        
+
+        axios.put(settings.serverurl +'/room/' +this.props.room, ({messageid: Date.now(), message:"NH"}))
+            .catch(err => alert(err));
+
         this.setState({ cards:[], faceDown:true });
         
     }
