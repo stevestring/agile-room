@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import Card from "./Card";
-import RoomChooser from "./RoomChooser";
-import PlayedCards from "./PlayedCards";
+import Hand from "./Hand";
 import axios from 'axios';
 var settings = require( './settings');
 
-export default class PlayerHand extends React.Component{
+export default class FistOfFive extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {selectedCard:null, player: Math.floor(Math.random()*1000), lastMessageId:null};
+        this.state = {selectedItem:null, player: Math.floor(Math.random()*1000), lastMessageId:null};
         this.handleRoomChange = this.handleRoomChange.bind(this);
     }
 
@@ -26,7 +24,7 @@ export default class PlayerHand extends React.Component{
                     alert (error);
                 });
         }
-        this.setState({text: param,selectedCard:param});
+        this.setState({text: param,selectedItem:param});
         
     }
 
@@ -54,7 +52,7 @@ export default class PlayerHand extends React.Component{
                     // alert(res.data.MessageId +";"+ this.state.lastMessageId);
                     if (res.data.MessageId != this.state.lastMessageId ){ //Is there a new message
                         
-                        if (res.data.Message=="NH") //New Hand
+                        if (res.data.Message=="NH") //New Hand TODO: Change this generic name
                         {
 
                             this.setState({  selectedCard:null, lastMessageId : res.data.MessageId})//We processed the message
@@ -65,33 +63,19 @@ export default class PlayerHand extends React.Component{
                 .catch(err => console.log(err))
         }
 
-        // if (this.props.room !=null)
-        // {
-        //     axios.get(settings.serverurl+'/player-input/'+ this.props.room +'/'+ this.state.player)
-        //         .then(res => {
-        //             if (res.data.Card==null)
-        //             {
-
-        //                 this.setState({  selectedCard:null })
-        //             }
-        //         })
-        //         .catch(err => console.log(err))
-        // }
-        
-
     }
 
 
     render() {
         {/* TODO: Move userPrompt out of component */}
         let userPrompt; 
-        if (this.state.selectedCard == null)
+        if (this.state.selectedItem == null)
         {
-            userPrompt = 'Choose a card!';
+            userPrompt = 'Choose a Hand';
         }
         else
         {
-            userPrompt = 'Wait for Dealer...';
+            userPrompt = 'Wait for Team...';
         }
 
 
@@ -106,16 +90,13 @@ export default class PlayerHand extends React.Component{
                 <p className="App-title">             
                     {userPrompt}
                 </p>   
-                {/* <h1>{this.state.player}</h1> */}
-                <div/>
-                <Card selectedCard={this.state.selectedCard} text = '1/2' onClick={(e) => this.handleClick( '1/2')}/>
-                <Card selectedCard={this.state.selectedCard} text = '1' onClick={(e) => this.handleClick( '1')}/>
-                <Card selectedCard={this.state.selectedCard} text = '2' onClick={(e) => this.handleClick( '2')}/>
-                <Card selectedCard={this.state.selectedCard} text = '3' onClick={(e) => this.handleClick( '3')}/>
-                <Card selectedCard={this.state.selectedCard} text = '5' onClick={(e) => this.handleClick( '5')}/>
-                <Card selectedCard={this.state.selectedCard} text = '8' onClick={(e) => this.handleClick( '8')}/>
-                <Card selectedCard={this.state.selectedCard} text = '15' onClick={(e) => this.handleClick( '15')}/>
 
+                <div/>
+                <Hand selectedItem={this.state.selectedItem} itemvalue = '1' onClick={(e) => this.handleClick( '1')}/>
+                <Hand selectedItem={this.state.selectedItem} itemvalue = '2' onClick={(e) => this.handleClick( '2')}/>
+                <Hand selectedItem={this.state.selectedItem} itemvalue = '3' onClick={(e) => this.handleClick( '3')}/>
+                <Hand selectedItem={this.state.selectedItem} itemvalue = '4' onClick={(e) => this.handleClick( '4')}/>
+                <Hand selectedItem={this.state.selectedItem} itemvalue = '5' onClick={(e) => this.handleClick( '5')}/>
 
             </div>
 

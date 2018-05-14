@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PlayerHand from './PlayerHand.js';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { Code } from 'react-bootstrap';
@@ -28,15 +27,15 @@ class App extends Component {
         
         <Thumbnail href="/lobby"  src="/Team.jpg" responsive ="true" >
                     <h3>
-                    Team  
-        </h3> 
+                    Team</h3>   (Join a Room)
+        
         </Thumbnail>
         </Col>
     <Col xs={6} sm={3} md={3} mdPull={3}>
     <Thumbnail href="/create-room"  src="/Facilitator.jpg"  responsive="true" >
                     <h3>
-                    Facilitator 
-        </h3> 
+                    Facilitator </h3>  (Create a Room)
+       
         </Thumbnail>
     </Col>
   </Row>

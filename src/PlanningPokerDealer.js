@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Button } from 'react-bootstrap';
 var settings = require( './settings');
 
-export default class PlayedCards extends React.Component{
+export default class PlanningPokerDealer extends React.Component{
     constructor(props) {
         super(props);
         this.state = {cards:[], faceDown:true};
@@ -60,8 +60,9 @@ export default class PlayedCards extends React.Component{
 
                 {this.state.cards.map(c => <Card key={c.id} text = {c.Card} faceDown={this.state.faceDown}></Card>)}
                 {hasCards?(                
-                    <p>
-                        <Button onClick={()=>this.newHand()}>New Hand</Button>
+                    
+                    <p><br/>
+                        <Button onClick={()=>this.newHand()}>New Hand</Button> &nbsp;
                         <Button onClick={()=>this.showCards()}>Show Cards</Button>
                     </p>
                 ):(

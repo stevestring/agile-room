@@ -14,16 +14,21 @@
   color: white;
 }
 
-.Room-header {
-  /* background-color: #222; */
-  /* height: 100px; */
-  /* padding: 10px; */
-  /* color: white; */
+.navbar{
+ margin-bottom: 0;
+ border-radius: 0;
 }
-
+.panel{
+  border-radius: 0;
+ }
+ .panel-heading{
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+ }
+ 
 
 .App-title {
-  font-size: 3em;
+  font-size: x-large;
 }
 
 .App-intro {
@@ -39,6 +44,23 @@ body {
     /* background-color:darkolivegreen; */
 }
 
+
+.roomButton {
+   display:inline-block;
+  /*color:white;
+  border:5px solid black;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  cursor:pointer; */
+  width: 120px;
+
+  /* text-align: center;
+  line-height: 80px;
+  
+  font-size: xx-large;*/
+  border-radius: 5px; 
+  margin: 10px;
+}
+
 .Card {
   display:inline-block;
   color:white;
@@ -52,6 +74,30 @@ body {
   margin: 10px;
   font-size: xx-large;
   border-radius: 5px;
+}
+
+.Hand {
+  display:inline-block;
+  cursor:pointer;
+  width: 60px;
+  text-align: center;
+  line-height: 120px;
+  margin: 10px;
+  /* font-size: xx-large;
+  border-radius: 5px; */
+}
+.SelectedHand {
+  display:inline-block;
+  cursor:pointer;
+  width: 60px;
+  text-align: center;
+  line-height: 80px;
+  margin: 10px;
+  background-color: rgb(165, 247, 165);
+  border-radius: 5px; 
+  /* border:5px solid green; */
+  /* font-size: xx-large;
+  */
 }
 
 .faceDownCard {

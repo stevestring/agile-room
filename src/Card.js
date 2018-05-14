@@ -4,7 +4,7 @@ export default class Card extends React.Component{
     render() {
 
         //TODO: Fix card type... Card shouldnt know about other cards
-        let cardType = this.props.selectedCard ===this.props.text  ? ('selectedCard') : ( 'Card');
+        let cardType = this.props.selectedItem ===this.props.text  ? ('selectedCard') : ( 'Card');
 
         if (this.props.faceDown) {
             cardType = 'faceDownCard'
