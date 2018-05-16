@@ -55,7 +55,7 @@ export default class FistOfFive extends React.Component{
                         if (res.data.Message=="NH") //New Hand TODO: Change this generic name
                         {
 
-                            this.setState({  selectedCard:null, lastMessageId : res.data.MessageId})//We processed the message
+                            this.setState({  selectedItem:null, lastMessageId : res.data.MessageId})//We processed the message
                         }
                             
                     }

@@ -27,6 +27,7 @@ class CreateRoom extends Component {
     this.handleRoomNameChange = this.handleRoomNameChange.bind(this);
     this.handleActivityChange = this.handleActivityChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.jumptoDealer = this.jumptoDealer.bind(this);
   }
 
 
@@ -45,20 +46,26 @@ handleSubmit(event) {
 
 
     //Call API
-    axios.put((settings.serverurl+'/room/'+this.state.room ), ({name: this.state.roomname, activity:this.state.activity, activitystate:0}))
-    .then(function (response) {
-        console.log(response);
-    })
+    axios.get((settings.serverurl+'/room/'+this.state.room ), {name: this.state.roomname, activity:this.state.activity, activitystate:0})
+        .then( function(result) {this.jumptoDealer(result)}
+      )    
     .catch(function (error) {
         console.log(error);
         alert (error);
     });
 
-    //Navgate to Dealer (Supply room)
-    this.props.history.push("/dealer/"+this.state.room);
+    return 0;
+    
     
 }
 
+jumptoDealer()
+{
+    //Navgate to Dealer (Supply room)
+    //alert (this.state.room);
+    this.props.history.push("/dealer/"+this.state.room);
+    
+}
 
   render() {
 

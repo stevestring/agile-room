@@ -40,26 +40,38 @@
   to { transform: rotate(360deg); }
 }
 
-body {
-    /* background-color:darkolivegreen; */
-}
 
 
 .roomButton {
-   display:inline-block;
-  /*color:white;
-  border:5px solid black;
-  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
-  cursor:pointer; */
+  display:inline-block;
   width: 120px;
-
-  /* text-align: center;
-  line-height: 80px;
-  
-  font-size: xx-large;*/
   border-radius: 5px; 
   margin: 10px;
 }
+
+
+
+.Hand {
+  display:inline-block;
+  cursor:pointer;
+  width: 75px;
+  text-align: center;
+  line-height: 100px;
+  margin: 10px;
+
+}
+.SelectedHand {
+  display:inline-block;
+  cursor:pointer;
+  width: 75px;
+  text-align: center;
+  line-height: 100px;
+  margin: 10px;
+  background-color: rgb(165, 247, 165);
+  border-radius: 5px; 
+
+}
+
 
 .Card {
   display:inline-block;
@@ -68,42 +80,16 @@ body {
   background-color: grey;
   box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
   cursor:pointer;
-  width: 80px;
+  width: 60px;
   text-align: center;
-  line-height: 120px;
+  line-height: 90px;
   margin: 10px;
-  font-size: xx-large;
+  font-size: x-large;
   border-radius: 5px;
-}
-
-.Hand {
-  display:inline-block;
-  cursor:pointer;
-  width: 60px;
-  text-align: center;
-  line-height: 120px;
-  margin: 10px;
-  /* font-size: xx-large;
-  border-radius: 5px; */
-}
-.SelectedHand {
-  display:inline-block;
-  cursor:pointer;
-  width: 60px;
-  text-align: center;
-  line-height: 80px;
-  margin: 10px;
-  background-color: rgb(165, 247, 165);
-  border-radius: 5px; 
-  /* border:5px solid green; */
-  /* font-size: xx-large;
-  */
 }
 
 .faceDownCard {
     display:inline-block;
-    color:black;
-    border:5px solid black;
     background: #36c;
     background:
             linear-gradient(115deg, transparent 75%, rgba(255,255,255,.8) 75%) 0 0,
@@ -113,20 +99,15 @@ body {
             #36c;
     background-size: 15px 30px;
     box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
-    cursor:pointer;
-    width: 80px;
-    text-align: center;
-    line-height: 120px;
-    margin: 10px;
-    font-size: xx-large;
-    border-radius: 5px;
+
+
 }
 
 .selectedCard {
-    display:inline-block;
-    color:white;
+    /* display:inline-block;
+    color:white; */
     border:5px solid green;
-    background-color:grey;
+    /* background-color:grey;
     box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
     cursor:pointer;
     width: 80px;
@@ -134,7 +115,7 @@ body {
     line-height: 120px;
     margin: 10px;
     font-size: xx-large;
-    border-radius: 5px;
+    border-radius: 5px; */
 }
 
 

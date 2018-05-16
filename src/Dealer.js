@@ -21,45 +21,71 @@ class Dealer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {showAlert:true, activity:null}
+    this.state = {showAlert:true, activity:null, playerInputs:[]}
     this.handleActivityChange = this.handleActivityChange.bind(this);
     this.handleDismiss = this.handleDismiss.bind(this);
+    this.handleReset = this.handleReset.bind(this);
+  }
+
+
+  componentDidMount(){
+
+ 
+    this.loadRoomData();
+    this.loadData();
+
+    this.interval = setInterval(() => {
+        this.loadData()}
+    , 1000 * 1)
+
+  }
+
+  loadData()
+  {
+
+      if (this.props.room != null)
+      {
+          axios.get(settings.serverurl+'/player-inputs/'+this.props.room )
+              .then(res => this.setState({ playerInputs:res.data.Items }))
+              .catch(err => console.log(err));
+      }
+
+      // alert("loading player data");
   }
 
   handleDismiss() {
     this.setState({ showAlert: false });
   }
 
-  handleActivityChange ( eventKey) {
+
+  handleReset(){
+        //delete user cards?  TODO: Is this necessary?
+        
+        axios.delete(settings.serverurl +'/player-inputs/' +this.props.room)
+        .catch(err => alert(err));
       
 
-        //delete user card?  TODO: Is this necessary?
-        axios.delete(settings.serverurl +'/player-inputs/' +this.props.room)
+        //alert(this.state.activity);
+        axios.put(settings.serverurl +'/room/' +this.props.room, ({messageid: Date.now(), message:"NH", activity:this.state.activity}))
             .catch(err => alert(err));
+  }
 
-        axios.put((settings.serverurl+'/room/'+this.props.room ), ({name: this.state.roomname, activity:eventCode, activitystate:0, message:"NH"}))
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-            alert (error);
-        });
+
+  handleActivityChange ( eventKey) {
 
       //alert ( eventKey);
       var eventCode = "pp";
       if (eventKey==0)
       {
-        eventCode = "pp";
-        this.setState({activity: eventCode});
+        eventCode = "pp";    
       }
       else if (eventKey==1)
       {
         eventCode = "ff";
-        this.setState({activity: eventCode});
+        
       }
 
-
+      this.setState({activity: eventCode},this.handleReset);
 
   }
 
@@ -78,7 +104,7 @@ class Dealer extends Component {
 
     return (
       <div className="App">
-      <NavBar room={this.props.room} dealer="true" onActivityChange ={this.handleActivtyChange}/>
+      <NavBar dealer="true" room={this.props.room} onActivityChange ={this.handleActivtyChange}/>
       
       {this.state.showAlert?(
         <Alert onDismiss={this.handleDismiss}>
@@ -105,29 +131,29 @@ class Dealer extends Component {
         <br/>
 
       {(this.state.activity=="pp") &&
-        <PlanningPokerDealer room={this.props.room} roomstate="0"/>
+        <PlanningPokerDealer cards = {this.state.playerInputs}  onReset = {this.handleReset} roomstate="0"/>
       }
       {(this.state.activity=="ff") &&
-        <FistOfFiveDealer room={this.props.room} roomstate="0"/>
+        <FistOfFiveDealer cards = {this.state.playerInputs}  onReset = {this.handleReset} roomstate="0"/>
       }
       </div>
     );
   }
-  componentDidMount(){        
-    this.loadData();
 
-  }
 
-  loadData(){
-
+  loadRoomData(){
+    
     if (this.props.room !=null)
     {
+      //alert (this.state.room);
         axios.get(settings.serverurl+'/room/'+ this.props.room )
             .then(res => {
               this.setState({  activity : res.data.Activity})//We processed the message
             })
             .catch(err => console.log(err))
     }
+
+    //alert (this.state.activity);
 
 }
 
