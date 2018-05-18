@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-
 }
 
 .App-logo {
@@ -11,20 +10,25 @@
 .App-header {
   background-color: #333;
   height: 100px;
-  padding: 10px;
+  /* padding: 10px; */
   color: white;
 }
 
-.Room-header {
-  background-color: #222;
-  height: 100px;
-  padding: 10px;
-  color: white;
+.navbar{
+ margin-bottom: 0;
+ border-radius: 0;
 }
-
+.panel{
+  border-radius: 0;
+ }
+ .panel-heading{
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+ }
+ 
 
 .App-title {
-  font-size: 3em;
+  font-size: x-large;
 }
 
 .App-intro {
@@ -36,29 +40,56 @@
   to { transform: rotate(360deg); }
 }
 
-body {
-    background-color:darkolivegreen;
+
+
+.roomButton {
+  display:inline-block;
+  width: 120px;
+  border-radius: 5px; 
+  margin: 10px;
 }
+
+
+
+.Hand {
+  display:inline-block;
+  cursor:pointer;
+  width: 75px;
+  text-align: center;
+  line-height: 100px;
+  margin: 10px;
+
+}
+.SelectedHand {
+  display:inline-block;
+  cursor:pointer;
+  width: 75px;
+  text-align: center;
+  line-height: 100px;
+  margin: 10px;
+  background-color: rgb(165, 247, 165);
+  border-radius: 5px; 
+
+}
+
 
 .Card {
   display:inline-block;
-  color:black;
+  color:white;
   border:5px solid black;
-  background-color: white;
+  background-color: grey;
   box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
   cursor:pointer;
-  width: 80px;
+  width: 60px;
   text-align: center;
-  line-height: 120px;
+  line-height: 90px;
   margin: 10px;
-  font-size: xx-large;
+  font-size: x-large;
   border-radius: 5px;
 }
 
 .faceDownCard {
     display:inline-block;
-    color:black;
-    border:5px solid black;
     background: #36c;
     background:
             linear-gradient(115deg, transparent 75%, rgba(255,255,255,.8) 75%) 0 0,
@@ -68,20 +99,15 @@ body {
             #36c;
     background-size: 15px 30px;
     box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
-    cursor:pointer;
-    width: 80px;
-    text-align: center;
-    line-height: 120px;
-    margin: 10px;
-    font-size: xx-large;
-    border-radius: 5px;
+
+
 }
 
 .selectedCard {
-    display:inline-block;
-    color:black;
-    border:5px solid #f44336;
-    background-color:white;
+    /* display:inline-block;
+    color:white; */
+    border:5px solid green;
+    /* background-color:grey;
     box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
     cursor:pointer;
     width: 80px;
@@ -89,7 +115,7 @@ body {
     line-height: 120px;
     margin: 10px;
     font-size: xx-large;
-    border-radius: 5px;
+    border-radius: 5px; */
 }
 
 

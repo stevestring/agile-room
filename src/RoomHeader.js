@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import RoomChooser from './RoomChooser';
+import { PageHeader } from 'react-bootstrap';
+// import NavBar from './NavBar';
 
 export default class RoomHeader extends React.Component{
     constructor(props) {
@@ -9,22 +10,17 @@ export default class RoomHeader extends React.Component{
 
     render() {
         
-        // if (this.props.room==null) {
-        //     return (
-        //         <RoomChooser onChange={this.handleRoomChange}/>
-        //     );
-        // }
-        // else {
             return (
                 <div>
-                    <header className="Room-header">
-                    
-                   <h1 className="App-title">Room: {this.props.room}</h1>
+                    {/* <NavBar/> */}
+                    <PageHeader className="Room-header">
+                    Room:  {this.props.room}
+                   {/* <h1 className="App-title">Room: {this.props.room}</h1> */}
                    
-                   </header>
+                   </PageHeader>
                 </div>
              );
-        //  }
+
     }
 }
 
