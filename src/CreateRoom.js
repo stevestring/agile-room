@@ -40,14 +40,14 @@ class CreateRoom extends Component {
   }
 
 
-handleSubmit(event) {
+handleSubmit() {
     this.setState({roomname: this.state.roomname});
     this.setState({activity: this.state.activity});
+    var that = this;
 
-
-    //Call API
-    axios.get((settings.serverurl+'/room/'+this.state.room ), {name: this.state.roomname, activity:this.state.activity, activitystate:0})
-        .then( function(result) {this.jumptoDealer(result)}
+    // //Call API
+    axios.put((settings.serverurl+'/room/'+this.state.room ), {name: this.state.roomname, activity:this.state.activity, activitystate:0})
+        .then( res=> that.props.history.push("/dealer/"+that.state.room)
       )    
     .catch(function (error) {
         console.log(error);
@@ -74,6 +74,7 @@ jumptoDealer()
     return (
       <div className="App">
       <NavBar room = {this.state.room}/>
+      
       <p className="App-title">             
                     Create a Room
                 </p>   
@@ -103,7 +104,7 @@ jumptoDealer()
 
           <FormGroup style={{textAlign: "left"}}>
             <Col smOffset={4} sm={4}>
-              <Button type="submit">OK</Button>
+              <Button type="button" onClick={this.handleSubmit}>OK</Button>
             </Col>
           </FormGroup>
       </Form>
