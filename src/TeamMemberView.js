@@ -5,7 +5,7 @@ import FistOfFive from './FistOfFive.js';
 import axios from "axios/index";
 import NavBar from "./NavBar";
 import RoomHeader from "./RoomHeader";
-
+import subscribeToRoom from './api.js';
 var settings = require( './settings');
 
 class TeamMemberView extends Component {
@@ -13,6 +13,8 @@ class TeamMemberView extends Component {
   constructor(props) {
     super(props);
     this.state = {activty:"pp"};
+
+    subscribeToRoom((err, room) => this.loadData());
   }
 
   render() {
@@ -44,9 +46,9 @@ class TeamMemberView extends Component {
 
         
     this.loadData();
-    this.interval = setInterval(() => {
-        this.loadData()}
-    , 1000 * 2)
+    // this.interval = setInterval(() => {
+    //     this.loadData()}
+    // , 1000 * 2)
   }
 
   loadData(){

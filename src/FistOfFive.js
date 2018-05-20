@@ -31,10 +31,10 @@ export default class FistOfFive extends React.Component{
     componentDidMount(){
 
         
-        this.loadData();
-        this.interval = setInterval(() => {
-            this.loadData()}
-        , 1000 * 2)
+        // this.loadData();
+        // this.interval = setInterval(() => {
+        //     this.loadData()}
+        // , 1000 * 2)
     }
 
     handleRoomChange(event)

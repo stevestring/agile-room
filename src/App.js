@@ -7,15 +7,31 @@ import { Thumbnail } from 'react-bootstrap';
 import './bootstrap.min.css';
 import './App.css';
 import NavBar from "./NavBar";
+// import { subscribeToTimer } from './api';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      timestamp: 'no timestamp yet'
+    };
+    // subscribeToTimer((err, timestamp) => this.setState({ 
+    //   timestamp
+    // }));
+
+  }
+
   render() {
+
+
+
     return (
       <div className="App">
       <NavBar/>
-        {/* <header className="App-header">
-          <h1 className="App-title">Agile Room</h1>
-        </header> */}
+      <p className="App-intro">
+      This is the timer value: {this.state.timestamp}
+      </p>
 <Grid>
 <br/>
   <Row className="show-grid">
@@ -44,6 +60,10 @@ class App extends Component {
       </div>
     );
   };
+
+
+
+
 };
 
 

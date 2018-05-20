@@ -34,9 +34,9 @@ class Dealer extends Component {
     this.loadRoomData();
     this.loadData();
 
-    this.interval = setInterval(() => {
-        this.loadData()}
-    , 1000 * 1)
+    // this.interval = setInterval(() => {
+    //     this.loadData()}
+    // , 1000 * 1)
 
   }
 
