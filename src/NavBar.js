@@ -18,10 +18,10 @@ export default class NavBar extends React.Component{
         const isDealer = this.props.dealer != null;
             return (
                 <div>
-                    <Navbar inverse>
+                    <Navbar>
                     <Navbar.Header>
                         <Navbar.Brand>
-                        <a href="/">Agile Room</a>
+                        <a href="/" ><div class="brand">Team Room</div></a>
                         </Navbar.Brand>
                     </Navbar.Header>
                     

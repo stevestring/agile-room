@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import Hand from "./Hand";
+import Hand from "../components/Hand";
 import axios from 'axios';
-var settings = require( './settings');
+var settings = require( '../settings');
 
 export default class FistOfFive extends React.Component{
     constructor(props) {
         super(props);
         this.state = {selectedItem:null, player: Math.floor(Math.random()*1000), lastMessageId:null};
-        this.handleRoomChange = this.handleRoomChange.bind(this);
     }
 
-    handleClick(param, e)  {
-        
+    handleClick(param, e)  {        
 
         if (this.state.player !=  null)
         {
@@ -28,41 +26,8 @@ export default class FistOfFive extends React.Component{
         
     }
 
-    componentDidMount(){
-
-        
-        // this.loadData();
-        // this.interval = setInterval(() => {
-        //     this.loadData()}
-        // , 1000 * 2)
-    }
-
-    handleRoomChange(event)
-    {
-        this.setState({room: event});
-    }
-
-    loadData(){
-
-        if (this.props.room !=null)
-        {
-            axios.get(settings.serverurl+'/room/'+ this.props.room )
-                .then(res => {
-
-                    // alert(res.data.MessageId +";"+ this.state.lastMessageId);
-                    if (res.data.MessageId != this.state.lastMessageId ){ //Is there a new message
-                        
-                        if (res.data.Message=="NH") //New Hand TODO: Change this generic name
-                        {
-
-                            this.setState({  selectedItem:null, lastMessageId : res.data.MessageId})//We processed the message
-                        }
-                            
-                    }
-                })
-                .catch(err => console.log(err))
-        }
-
+    reset(){ 
+        this.setState({selectedItem : null});
     }
 
 

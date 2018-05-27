@@ -15,7 +15,6 @@ ReactDOM.render((
         <div>
             <Route exact path="/" component={App}/>
             <Route path="/index.html" component={App}/>
-            {/* <Route path="/dealer" component={Dealer}/>             */}
             <Route path="/lobby" component={Lobby}/>  
             <Route path="/create-room" component={CreateRoom}/>            
             <Route path="/room/:id" render={(props) => <TeamMemberView room={props.match.params.id}/>} />
