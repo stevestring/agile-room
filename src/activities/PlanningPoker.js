@@ -29,6 +29,7 @@ export default class PlanningPoker extends React.Component{
     }
   
     reset(){ 
+        // alert("resetting");
         this.setState({selectedItem : null});
     }
 

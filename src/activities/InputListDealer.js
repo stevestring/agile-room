@@ -3,7 +3,7 @@ import Hand from "../components/Hand";
 import { Button } from 'react-bootstrap';
 var settings = require( '../settings');
 
-export default class WhatWentWellDealer extends React.Component{
+export default class InputListDealer extends React.Component{
     constructor(props) {
         super(props);
     }
@@ -13,7 +13,7 @@ export default class WhatWentWellDealer extends React.Component{
     reset()
     {
         
-        this.setState({ faceDown:true });
+        // this.setState({ faceDown:true });
         this.props.onReset();
         
     }

@@ -28,7 +28,7 @@ class App extends Component {
 
   <h1>TEAM-ROOM</h1>
   <p>
-    Collaboration activities for Agile teams.
+  Online collaboration tools for Agile teams
   </p>
   <p>
     {/* <Button bsStyle="primary">Learn more</Button> */}

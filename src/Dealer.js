@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 
 import PlanningPokerDealer from "./activities/PlanningPokerDealer";
 import FistOfFiveDealer from "./activities/FistOfFiveDealer";
-import WhatWentWellDealer from "./activities/WhatWentWellDealer";
-//import WhatWentWrongDealer from "./activities/WhatWentWrongDealer";
+import InputListDealer from "./activities/InputListDealer";
 import axios from "axios/index";
 import NavBar from "./NavBar";
 import './bootstrap.min.css';
@@ -138,11 +137,11 @@ class Dealer extends Component {
     }
     else if (this.state.activity=="www")
     {
-      activityName = "What Went Well"
+      activityName = "What Went Well?"
     }
     else if (this.state.activity=="wwr")
     {
-      activityName = "What Went Wrong"
+      activityName = "What Went Wrong?"
     }
 
     return (
@@ -160,7 +159,7 @@ class Dealer extends Component {
 
       <Row>
         <Col xs={3} md={3}/>
-        <Col xs={6} md={6}><h1>{activityName}</h1></Col>
+        <Col xs={6} md={6}><h1 className = "activityHeader">{activityName}</h1></Col>
         <DropdownButton
           title={activityName}
           key={1}
@@ -182,11 +181,11 @@ class Dealer extends Component {
         <FistOfFiveDealer cards = {this.state.playerInputs}  onReset = {this.handleReset} roomstate="0"/>
       }
       {(this.state.activity=="www") &&
-        <WhatWentWellDealer roomInputs = {this.state.roomInputs}  onReset = {this.handleReset} roomstate="0"/>
+        <InputListDealer roomInputs = {this.state.roomInputs}  onReset = {this.handleReset} roomstate="0"/>
       }
-      {/* {(this.state.activity=="wwr") &&
-        <WhatWentWrongDealer playerInputs = {this.state.playerInputs}  onReset = {this.handleReset} roomstate="0"/>
-      } */}
+      {(this.state.activity=="wwr") &&
+        <InputListDealer roomInputs = {this.state.roomInputs}  onReset = {this.handleReset} roomstate="0"/>
+      }
 
       </div>
     );

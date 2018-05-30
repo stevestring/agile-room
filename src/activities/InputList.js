@@ -10,12 +10,13 @@ import { HelpBlock } from 'react-bootstrap';
 import { Grid } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
+import { InputGroup } from 'react-bootstrap';
 var uuid = require('uuid');
 
 
 var settings = require( '../settings');
 
-export default class WhatWentWell extends React.Component{
+export default class InputList extends React.Component{
     constructor(props) {
         super(props);
         this.state = {userInput:"", lastMessageId:null};
@@ -23,11 +24,16 @@ export default class WhatWentWell extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
- 
+    reset(){ 
+        this.setState({userInput : ""});
+    }
+
     handleSubmit() {
         var that = this;
         //alert ("Submitting: "+this.state.userInput);
-        var uuid1 = uuid.v1();
+        // var uuid1 = uuid.v1();
+
+        var uuid1 = Math.floor(Math.random()*10000);
         // //Call API
         axios.put((settings.serverurl+'/room-input/'+this.props.room +'/'+uuid1), ({Input: this.state.userInput}))
         .then(function (response) {     
@@ -37,8 +43,6 @@ export default class WhatWentWell extends React.Component{
             console.log(error);
             alert (error);
         });
-
-            
 
     }
 
@@ -78,14 +82,26 @@ export default class WhatWentWell extends React.Component{
                 <br/>
                 <br/>
                 <div/>
-
+                        {/* <Grid>
                         <Form inline >
                         <FormGroup bsSize="large"  >
                             <FormControl  type="text" value = {this.state.userInput} onChange={this.handleInputChange}/>{" "}
                             <Button type="button" bsSize="large" onClick={()=> this.handleSubmit()}>Submit</Button>
                         </FormGroup>
-                    </Form>
-
+                        </Form>
+                        </Grid> */}
+                        <Grid>
+                        <Form  >
+                        <FormGroup >
+                        <InputGroup>
+                        <FormControl  type="text" value = {this.state.userInput} onChange={this.handleInputChange}/>                        
+                        <InputGroup.Button>
+                            <Button type="button" onClick={()=> this.handleSubmit()}>Submit</Button>
+                        </InputGroup.Button>
+                        </InputGroup>
+                        </FormGroup>
+                        </Form>
+                        </Grid>
             </div>
 
         );

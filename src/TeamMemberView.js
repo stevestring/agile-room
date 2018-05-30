@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import PlanningPoker from './activities/PlanningPoker.js';
 import FistOfFive from './activities/FistOfFive.js';
-import WhatWentWell from "./activities/WhatWentWell";
-//import WhatWentWrong from "./activities/WhatWentWrong";
+import InputList from "./activities/InputList";
 import axios from "axios/index";
 import NavBar from "./NavBar";
-import RoomHeader from "./RoomHeader";
 import {subscribeToRoomChanges} from './api.js';
+import ActivityHeader from '../src/components/ActivityHeader';
 var settings = require( './settings');
 
 class TeamMemberView extends Component {
@@ -35,7 +34,7 @@ class TeamMemberView extends Component {
       return (      
           <div className="App">
             <NavBar room={this.props.room}/>  
-            <h1>Planning Poker</h1>
+            <ActivityHeader activityName="Planning Poker"/>
             <PlanningPoker ref="child" room={this.props.room}/>
           </div>
       );
@@ -45,7 +44,7 @@ class TeamMemberView extends Component {
       return (      
         <div className="App">
           <NavBar room={this.props.room}/>  
-          <h1>Fist Of Five</h1>
+          <ActivityHeader activityName="Fist Of Five"/>
           <FistOfFive ref="child" room={this.props.room}/>
         </div>
     );
@@ -55,13 +54,21 @@ class TeamMemberView extends Component {
       return (      
         <div className="App">
           <NavBar room={this.props.room}/>  
-          <h1>What Went Well</h1>
-          <WhatWentWell ref="child" room={this.props.room}/>
+          <ActivityHeader activityName="What Went Well?"/>
+          <InputList ref="child" room={this.props.room}/>
         </div>
-    );
-    
+    );    
     }
-
+    else if (this.state.activty==="wwr")
+    {
+      return (      
+        <div className="App">
+          <NavBar room={this.props.room}/>  
+          <ActivityHeader activityName="What Went Wrong?"/>
+          <InputList ref="child" room={this.props.room}/>
+        </div>
+    );    
+    }
   }
   componentDidMount(){        
     this.loadData();
@@ -81,15 +88,15 @@ class TeamMemberView extends Component {
     {
         axios.get(settings.serverurl+'/room/'+ this.props.room )
             .then(res => {
-              if (res.data.Activity != this.state.Activity ){ //Is there a new message
+              if (res.data.Activity !== this.state.Activity ){ //Is there a new message
                 {
                   this.setState({activty:res.data.Activity});                  
                 }
               }
 
               // alert(res.data.MessageId +";"+ this.state.lastMessageId);
-              if (res.data.MessageId != this.state.lastMessageId ){ //Is there a new message                  
-                if (res.data.Message=="NH") //New Hand
+              if (res.data.MessageId !== this.state.lastMessageId ){ //Is there a new message                  
+                if (res.data.Message==="NH") //New Hand
                 {
                     this.setState({ lastMessageId : res.data.MessageId})//We processed the message
                     this.resetActivity();
