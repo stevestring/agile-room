@@ -15,7 +15,7 @@ import { Col } from 'react-bootstrap';
 import { Panel } from 'react-bootstrap';
 import NavBar from "./NavBar";
 import Room from "./Room";
-
+import ActivityHeader from '../src/components/ActivityHeader';
 
 var settings = require( './settings');
 class Lobby extends Component {
@@ -56,11 +56,7 @@ class Lobby extends Component {
       
       <div className="App">
       <NavBar/>
-      <Panel bsStyle="primary">
-                        <Panel.Heading>
-      <Panel.Title componentClass="h3">Main Lobby</Panel.Title>
-    </Panel.Heading>
-    </Panel>
+      <ActivityHeader activityName="Main Lobby"/>
                     <p className="App-title">             
                         Select a Room...
                     </p> 

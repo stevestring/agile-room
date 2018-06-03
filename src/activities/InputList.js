@@ -80,7 +80,6 @@ export default class InputList extends React.Component{
             <div>
                 <br/>
                 <br/>
-                <br/>
                 <div/>
                         {/* <Grid>
                         <Form inline >

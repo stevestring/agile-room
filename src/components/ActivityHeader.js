@@ -5,10 +5,9 @@ export default class ActivityHeader extends React.Component{
         return (
             
             <div>
-                <br/>
-                
+                              
                 <h1 className = "activityHeader">{this.props.activityName}</h1>      
-                <br/>          
+                        
             </div>
         );
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ActivityHeader from '../src/components/ActivityHeader';
 import axios from "axios/index";
 import NavBar from "./NavBar";
 import RoomHeader from "./RoomHeader";
@@ -75,9 +75,7 @@ jumptoDealer()
       <div className="App">
       <NavBar room = {this.state.room}/>
       
-      <p className="App-title">             
-                    Create a Room
-                </p>   
+      <ActivityHeader activityName="Create a Room"/>
                 <br/>
         <Grid>
         <Form horizontal onSubmit={this.handleSubmit}>
