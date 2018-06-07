@@ -91,11 +91,11 @@ export default class InputList extends React.Component{
                         </Grid> */}
                         <Grid>
                         <Form  >
-                        <FormGroup >
+                        <FormGroup onSubmit={()=> this.handleSubmit()}>
                         <InputGroup>
                         <FormControl  type="text" value = {this.state.userInput} onChange={this.handleInputChange}/>                        
                         <InputGroup.Button>
-                            <Button type="button" onClick={()=> this.handleSubmit()}>Submit</Button>
+                            <Button type="submit" onClick={()=> this.handleSubmit()}>Submit</Button>
                         </InputGroup.Button>
                         </InputGroup>
                         </FormGroup>

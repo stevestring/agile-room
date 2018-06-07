@@ -23,7 +23,7 @@ export default class NavBar extends React.Component{
 
             return (
                 <div>
-                     <Navbar inverse  >
+                     <Navbar inverse>
                      
                         <Navbar.Brand>
                         <a href="/" ><div className="brand">Team Room</div></a>
@@ -44,17 +44,7 @@ export default class NavBar extends React.Component{
                     } 
 
                     </Navbar> 
-                    <br/>               
-                    {/* {hasRoom? (
-
-                    <Panel bsStyle="primary">
-                        <Panel.Heading>
-      <Panel.Title componentClass="h3">Room: {this.props.room} </Panel.Title>
-    </Panel.Heading>
-
-    </Panel>
-                    ):(<div/>)
-                    } */}
+                    {/* <br/>                */}
                 </div>
             );
             

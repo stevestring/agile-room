@@ -97,6 +97,10 @@
 }
 
 
+.thumbnail {
+  padding: 0;
+  border: 0;
+}
 
 .roomButton {
   display:inline-block;
@@ -196,5 +200,7 @@
 }
 
 
-
-
+.jumbotron {
+  background-color: white !important;
+}
+  
