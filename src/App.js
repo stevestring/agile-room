@@ -31,7 +31,6 @@ class App extends Component {
 </Jumbotron>
 <Grid>
   <Row className="show-grid">
-
   <Col xs={0} sm={3} md={3} mdPush={3}/>
   <Col xs={6} sm={3} md={3} mdPush={3}>
       <h3>Join Room</h3>  
