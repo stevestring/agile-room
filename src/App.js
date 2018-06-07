@@ -7,19 +7,35 @@ import { Thumbnail } from 'react-bootstrap';
 import './bootstrap.min.css';
 import './App.css';
 import NavBar from "./NavBar";
+import { Jumbotron } from 'react-bootstrap';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+
+
+
     return (
       <div className="App">
       <NavBar/>
-        {/* <header className="App-header">
-          <h1 className="App-title">Agile Room</h1>
-        </header> */}
-<Grid>
-<br/>
-  <Row className="show-grid">
 
+<br/>
+<Jumbotron >
+
+  <h1>TEAM-ROOM</h1>
+  <p>
+  Online collaboration tools for Agile teams
+  </p>
+  <p>
+    {/* <Button bsStyle="primary">Learn more</Button> */}
+  </p>
+</Jumbotron>
+<Grid>
+  <Row className="show-grid">
 
   <Col xs={0} sm={3} md={3} mdPush={3}/>
   <Col xs={6} sm={3} md={3} mdPush={3}>
@@ -44,6 +60,10 @@ class App extends Component {
       </div>
     );
   };
+
+
+
+
 };
 
 

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Hand from "./Hand";
-import RoomChooser from "./RoomChooser";
+import Hand from "../components/Hand";
 import { Button } from 'react-bootstrap';
-var settings = require( './settings');
+var settings = require( '../settings');
 
 export default class FistOfFiveDealer extends React.Component{
     constructor(props) {

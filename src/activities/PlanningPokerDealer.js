@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import Card from "./Card";
-import RoomChooser from "./RoomChooser";
+import Card from "../components/Card";
 import { Button } from 'react-bootstrap';
-var settings = require( './settings');
+var settings = require( '../settings');
 
 export default class PlanningPokerDealer extends React.Component{
     constructor(props) {
         super(props);
         this.state = {faceDown:true};
     }
-
 
     showCards()
     {
