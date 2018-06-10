@@ -12,7 +12,6 @@ import { Alert } from 'react-bootstrap';
 import { Label } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
 import { MenuItem } from 'react-bootstrap';
 import { DropdownButton } from 'react-bootstrap';
 import {subscribeToPlayerInputChanges} from './api.js';
@@ -100,21 +99,21 @@ class Dealer extends Component {
 
       //alert ( eventKey);
       var eventCode = "pp";
-      if (eventKey==0)
+      if (eventKey===0)
       {
         eventCode = "pp";    
       }
-      else if (eventKey==1)
+      else if (eventKey===1)
       {
         eventCode = "ff";
         
       }
-      else if (eventKey==2)
+      else if (eventKey===2)
       {
         eventCode = "www";
         
       }
-      else if (eventKey==3)
+      else if (eventKey===3)
       {
         eventCode = "wwr";        
       }
@@ -127,19 +126,19 @@ class Dealer extends Component {
   render() {
 
     var activityName = "-"
-    if (this.state.activity=="pp")
+    if (this.state.activity==="pp")
     {
       activityName = "Planning Poker"
     }
-    else if (this.state.activity=="ff")
+    else if (this.state.activity==="ff")
     {
       activityName = "Fist Of Five"
     }
-    else if (this.state.activity=="www")
+    else if (this.state.activity==="www")
     {
       activityName = "What Went Well?"
     }
-    else if (this.state.activity=="wwr")
+    else if (this.state.activity==="wwr")
     {
       activityName = "What Went Wrong?"
     }
