@@ -3,6 +3,7 @@ import './App.css';
 import PlanningPoker from './activities/PlanningPoker.js';
 import FistOfFive from './activities/FistOfFive.js';
 import InputList from "./activities/InputList";
+import VotingList from "./activities/VotingList";
 import axios from "axios/index";
 import NavBar from "./NavBar";
 import {subscribeToRoomChanges} from './api.js';
@@ -13,14 +14,27 @@ class TeamMemberView extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {activty:null, lastMessageId:null};
-
+    this.state = {activity:null, lastMessageId:null, activityState:null, roomInputs:null};
     subscribeToRoomChanges(this.props.room, (err,room) => this.loadData());
+    //subscribeToRoomInputChanges(this.props.room, (err,room) => this.loadRoomInputs());
+  }
+
+
+  loadRoomInputs()
+  {
+
+      if (this.props.room != null)
+      {
+          axios.get(settings.serverurl+'/room-inputs/'+this.props.room )
+              .then(res => this.setState({ roomInputs:res.data.Items }))
+              .catch(err => console.log(err));
+      }
+
   }
 
   render() {
 
-    if (this.state.activty===null)
+    if (this.state.activity===null)
     {
       return (      
           <div className="App">
@@ -29,7 +43,7 @@ class TeamMemberView extends Component {
       );
     }
 
-    else if (this.state.activty==="pp")
+    else if (this.state.activity==="pp")
     {
       return (      
           <div className="App">
@@ -39,7 +53,7 @@ class TeamMemberView extends Component {
           </div>
       );
     }
-    else if (this.state.activty==="ff")
+    else if (this.state.activity==="ff")
     {
       return (      
         <div className="App">
@@ -49,7 +63,7 @@ class TeamMemberView extends Component {
         </div>
     );
     }
-    else if (this.state.activty==="www")
+    else if (this.state.activity==="www")
     {
       return (      
         <div className="App">
@@ -59,7 +73,7 @@ class TeamMemberView extends Component {
         </div>
     );    
     }
-    else if (this.state.activty==="wwr")
+    else if (this.state.activity==="wwr")
     {
       return (      
         <div className="App">
@@ -69,9 +83,21 @@ class TeamMemberView extends Component {
         </div>
     );    
     }
+    else if (this.state.activity==="ii")
+    {
+      return (      
+        <div className="App">
+          <NavBar room={this.props.room}/>  
+          <ActivityHeader activityName="Improvement Ideas"/>
+          {/* <h1>{this.state.activityState}</h1> */}
+          <VotingList ref="child" room={this.props.room} roomInputs ={this.state.roomInputs} activityState = {this.state.activityState}/>
+        </div>
+    );    
+    }
   }
   componentDidMount(){        
     this.loadData();
+    this.loadRoomInputs();
   }
 
   resetActivity()
@@ -90,7 +116,16 @@ class TeamMemberView extends Component {
             .then(res => {
               if (res.data.Activity !== this.state.Activity ){ //Is there a new message
                 {
-                  this.setState({activty:res.data.Activity});                  
+                  this.setState({activity:res.data.Activity});                  
+                }
+              }
+
+              
+              if (res.data.ActivityState !== this.state.activityState ){ //Is there a new ActivityState
+                {
+                  //alert(res.data.ActivityState);
+                  this.setState({activityState:res.data.ActivityState},this.loadRoomInputs());  //Some rooms require room inputs for players (VotingList)  If game state changes, load roomInputs
+                  
                 }
               }
 
@@ -105,6 +140,8 @@ class TeamMemberView extends Component {
             })
             .catch(err => console.log(err))
     }
+
+    
 
 }
 

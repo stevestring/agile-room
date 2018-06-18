@@ -7,14 +7,14 @@ export default class ListItem extends React.Component{
         if (this.props.faceDown) {
             return (
                 <div>
-                    <h3>{"x".repeat(5)}</h3>
+                   <div>{this.props.votes}</div><div>{"x".repeat(5)}</div>
                 </div>
             );
         }
         else {
             return (
                 <div>
-                <h3>{this.props.text}</h3>                                
+                <div>{this.props.votes}</div><div>{this.props.text}</div>                                 
                 </div>
             );
         }
