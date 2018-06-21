@@ -11,6 +11,7 @@ import { Grid } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { InputGroup } from 'react-bootstrap';
+import RoomInputForm from "../components/RoomInputForm";
 var uuid = require('uuid');
 
 
@@ -19,18 +20,15 @@ var settings = require( '../settings');
 export default class InputList extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {userInput:"", lastMessageId:null};
-        this.handleInputChange = this.handleInputChange.bind(this);
+        this.state = { lastMessageId:null};
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleKeyUp = this.handleKeyUp.bind(this);
     }
-
 
     reset(){ 
         this.setState({userInput : ""});
     }
 
-    handleSubmit() {
+    handleSubmit(userInput) {
 
         var that = this;
         //alert ("Submitting: "+this.state.userInput);
@@ -38,21 +36,15 @@ export default class InputList extends React.Component{
 
         var uuid1 = Math.floor(Math.random()*10000);
         // //Call API
-        axios.put((settings.serverurl+'/room-input/'+this.props.room +'/'+uuid1), ({Input: this.state.userInput}))
+        axios.put((settings.serverurl+'/room-input/'+this.props.room +'/'+uuid1), ({Input: userInput}))
         .then(function (response) {     
-            that.setState({userInput:""});
-
+            
         })
         .catch(function (error) {
             console.log(error);
             alert (JSON.stringify(error));
         });
 
-    }
-
-    handleInputChange(event)
-    {
-        this.setState({userInput: event.target.value});
     }
 
     loadData(){
@@ -77,14 +69,6 @@ export default class InputList extends React.Component{
 
     }
 
-    handleKeyUp(event) {
-        //alert (event.keyCode);
-        if (event.keyCode === 13) //Enter key
-        {
-            this.handleSubmit();
-        }
-    }
-
     render() {
 
         return (
@@ -92,16 +76,7 @@ export default class InputList extends React.Component{
                 <br/>
                 <br/>
                 <div/>
-                        <Grid>                       
-                        <FormGroup >
-                        <InputGroup>
-                        <FormControl  type="text" value = {this.state.userInput} onKeyUp={this.handleKeyUp} onChange={this.handleInputChange}/>                        
-                        <InputGroup.Button>
-                            <Button type="button" onClick={this.handleSubmit}>Submit</Button>
-                        </InputGroup.Button>
-                        </InputGroup>
-                        </FormGroup>                        
-                        </Grid>
+                        <RoomInputForm onSubmit={this.handleSubmit}/>
             </div>
 
         );

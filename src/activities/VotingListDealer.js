@@ -57,39 +57,27 @@ export default class VotingListDealer extends React.Component{
         var votes = inputs;
 
         const copyArray = inputs.map(a => a.Input); //TODO  What is this for?
-        
         if (this.props.playerInputs !== null)
         {
-            
-
             var found = false;
             
-            for (let i = 0; i < this.props.playerInputs.length; i++) { 
-                if (typeof this.props.playerInputs[i].PlayerInput !== "undefined")
-                {
-                    //alert(JSON.stringify(this.props.playerInputs[i]));
-                    for (let j = 0; j < this.props.playerInputs[i].PlayerInput.length; j++) { 
-                        
-                        let obj = votes.find((o, k) => {
-                            if (o.RoomInputId === this.props.playerInputs[i].PlayerInput[j].roomInputId) {
-                                votes[k].votes = votes[k].votes +this.props.playerInputs[i].PlayerInput[j].Votes;
-                                found= true; // stop searching
-                            }
-                        });
+            for (let v = 0; v < votes.length; v++) { 
+            votes[v]["votes"]=0;
 
-                        // if (!found)
-                        // {
-                        //     var item = {}
-                        //     item ["RoomInputId"] = this.props.playerInputs[i].PlayerInput[j].roomInputId;
-                        //     item ["Votes"] = this.props.playerInputs[i].PlayerInput[j].Votes;
-                        //     votes.push(item);
-                        // }
+                for (let i = 0; i < this.props.playerInputs.length; i++) { 
+                    if (typeof this.props.playerInputs[i].PlayerInput !== "undefined")
+                    {
+                        for (let j = 0; j < this.props.playerInputs[i].PlayerInput.length; j++) { 
+
+                                if (votes[v].RoomInputId === this.props.playerInputs[i].PlayerInput[j].RoomInputId) {
+                                    votes[v].votes = votes[v].votes +this.props.playerInputs[i].PlayerInput[j].Votes;
+                                }
+                        }
                     }
                 }
-
             } 
         }
-        alert(JSON.stringify(votes));
+        //alert(JSON.stringify(votes));
 
         // alert (inputs);
         return (

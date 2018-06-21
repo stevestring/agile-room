@@ -90,7 +90,7 @@ class TeamMemberView extends Component {
           <NavBar room={this.props.room}/>  
           <ActivityHeader activityName="Improvement Ideas"/>
           {/* <h1>{this.state.activityState}</h1> */}
-          <VotingList ref="child" room={this.props.room} roomInputs ={this.state.roomInputs} activityState = {this.state.activityState}/>
+          <VotingList ref="child" room={this.props.room} roomInputs ={this.state.roomInputs} activityState = {this.state.activityState} maxVotes="3"/>
         </div>
     );    
     }

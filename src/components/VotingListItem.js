@@ -20,6 +20,8 @@ export default class VotingListItem extends React.Component{
             "text-align": "right"
         };
         const roomInputId = this.props.roomInputId;
+        
+        var votesLeft = this.props.remainingVotes;
 
         return (
             <div style ={leftDivStyle}>
@@ -31,13 +33,13 @@ export default class VotingListItem extends React.Component{
                 <Radio name={roomInputId} inline onClick={ (e) => { this.props.onChange (roomInputId,0) }}>
                     0
                 </Radio>{' '}
-                <Radio name={roomInputId} inline onClick={ (e) => { this.props.onChange (roomInputId,1) }}>
+                <Radio disabled={votesLeft<1} name={roomInputId} inline onClick={ (e) => { this.props.onChange (roomInputId,1) }}>
                     1
                 </Radio>{' '}
-                <Radio name={roomInputId} inline onClick={ (e) => { this.props.onChange (roomInputId,2) }}>
+                <Radio disabled={votesLeft<2} name={roomInputId} inline onClick={ (e) => { this.props.onChange (roomInputId,2) }}>
                     2
                 </Radio>{' '}
-                <Radio name={roomInputId} inline onClick={ (e) => { this.props.onChange (roomInputId,3) }}>
+                <Radio disabled={votesLeft<3} name={roomInputId} inline onClick={ (e) => { this.props.onChange (roomInputId,3) }}>
                     3
                 </Radio>
                 </FormGroup>

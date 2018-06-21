@@ -12,6 +12,7 @@ import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { InputGroup } from 'react-bootstrap';
 import VotingListItem from "../components/VotingListItem";
+import RoomInputForm from "../components/RoomInputForm";
 var uuid = require('uuid');
 
 
@@ -21,17 +22,15 @@ export default class VotingList extends React.Component{
     constructor(props) {
         super(props);
         this.state = {userInput:"", player: Math.floor(Math.random()*1000), lastMessageId:null, votes:[]};
-        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit= this.handleSubmit.bind(this);
         this.handleVote = this.handleVote.bind(this);
-        this.handleKeyUp = this.handleKeyUp.bind(this);
     }
 
     reset(){ 
         this.setState({userInput : ""});
     }
 
-    handleSubmit(event) {
+    handleSubmit(userInput) {
 
         var that = this;
         //alert ("Submitting: "+this.state.userInput);
@@ -39,20 +38,32 @@ export default class VotingList extends React.Component{
 
         var uuid1 = Math.floor(Math.random()*10000);
         // //Call API
-        axios.put((settings.serverurl+'/room-input/'+this.props.room +'/'+uuid1), ({Input: this.state.userInput}))
+        axios.put((settings.serverurl+'/room-input/'+this.props.room +'/'+uuid1), ({Input: userInput}))
         .then(function (response) {     
-            that.setState({userInput:""});
-            event.preventDefault();
-            event.stopPropagation();
+            
         })
         .catch(function (error) {
             console.log(error);
-            alert (error);
+            alert (JSON.stringify(error));
         });
 
-        
     }
 
+    totalVotes()
+    {
+        var sum = 0;
+        this.state.votes.forEach(function(obj)
+                {
+                    sum=sum + obj.Votes;
+                }
+            );
+            return sum;
+    }
+
+    remainingVotes()
+    {
+        return this.props.maxVotes - this.totalVotes();
+    }
     handleVote(itemId, votes) {
         var that = this;
         //alert ("Voting: "+itemId + ":" + votes);
@@ -90,19 +101,8 @@ export default class VotingList extends React.Component{
         }
         this.setState({Votes:jsonObj});
 
-    }
+        //alert ("Total Votes: "+ this.totalVotes() + " Remaining Votes: "+ this.remainingVotes());
 
-    handleInputChange(event)
-    {
-        this.setState({userInput: event.target.value});
-    }
-
-    handleKeyUp(event) {
-        //alert (event.keyCode);
-        if (event.keyCode === 13) //Enter key
-        {
-            this.handleSubmit();
-        }
     }
 
     //TODO: This should be 2 components
@@ -119,7 +119,8 @@ export default class VotingList extends React.Component{
                         (Vote)
                     </p> 
                     <div className="Cards">
-                        {inputs.map(c => <VotingListItem roomInputId = {c.RoomInputId} text={c.Input} faceDown={this.state.faceDown}  onChange={this.handleVote}>  </VotingListItem>)}
+                        {inputs.map(c => <VotingListItem roomInputId = {c.RoomInputId} text={c.Input} faceDown={this.state.faceDown}  
+                        onChange={this.handleVote} remainingVotes={this.remainingVotes()}>  </VotingListItem>)}
                     </div>
                 </div>
             )
@@ -132,16 +133,7 @@ export default class VotingList extends React.Component{
                 </p>   
                 <br/>
                 <div/>
-                    <Grid>                       
-                        <FormGroup >
-                        <InputGroup>
-                        <FormControl  type="text" value = {this.state.userInput} onKeyUp={this.handleKeyUp} onChange={this.handleInputChange}/>                        
-                        <InputGroup.Button>
-                            <Button type="button" onClick={this.handleSubmit}>Submit</Button>
-                        </InputGroup.Button>
-                        </InputGroup>
-                        </FormGroup>                        
-                    </Grid>
+                <RoomInputForm onSubmit={this.handleSubmit}/>
             </div>
 
         )};
