@@ -4,6 +4,9 @@ import { Radio } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { Grid } from 'react-bootstrap';
+import { Label } from 'react-bootstrap';
+
+
 export default class VotingListItem extends React.Component{
     
     constructor(props) {
@@ -14,42 +17,45 @@ export default class VotingListItem extends React.Component{
     render() {        
 
         const leftDivStyle = {
-            "text-align": "left"
+            "text-align": "left",
+            "margin-top":"5px"
         };
         const rightDivStyle = {
             "text-align": "right"
+            
         };
         const roomInputId = this.props.roomInputId;
         
-        var votesLeft = this.props.remainingVotes;
-
+        var votesLeft = this.props.remainingVotes>0;
+        var zeroVotes= this.props.votes===0;
         return (
-            <div style ={leftDivStyle}>
+            
                 <Grid>
             <Row>
-                <Col xs={2} sm={2} md={2} lg={2}/>
-                <Col xs={2} sm={2} md={2} lg={2}>
-                <FormGroup style ={rightDivStyle}>
-                <Radio name={roomInputId} inline onClick={ (e) => { this.props.onChange (roomInputId,0) }}>
-                    0
-                </Radio>{' '}
-                <Radio disabled={votesLeft<1} name={roomInputId} inline onClick={ (e) => { this.props.onChange (roomInputId,1) }}>
-                    1
-                </Radio>{' '}
-                <Radio disabled={votesLeft<2} name={roomInputId} inline onClick={ (e) => { this.props.onChange (roomInputId,2) }}>
-                    2
-                </Radio>{' '}
-                <Radio disabled={votesLeft<3} name={roomInputId} inline onClick={ (e) => { this.props.onChange (roomInputId,3) }}>
-                    3
-                </Radio>
-                </FormGroup>
+                <Col hidden-xs hidden-sm md={1} lg={1}/>
+                <Col xs={3} sm={3} md={1} lg={1}>
+                <div className="VotingButtons" style ={rightDivStyle}>
+                    {votesLeft?(
+                    <span className="VotingButtonArrow" onClick={ (e) => { this.props.onChange (roomInputId,this.props.votes+1) }}>▲</span>):
+                        (<span className="VotingButtonArrowDisabled">▲</span>)}
+                    <Label>{this.props.votes}</Label>
+                    {!zeroVotes?(
+                    <span className="VotingButtonArrow" onClick={ (e) => { this.props.onChange (roomInputId,this.props.votes-1) }}>▼</span>):
+                        (<span className="VotingButtonArrowDisabled">▼</span>)}
+                    
+                </div>
                 </Col>
-                <Col xs={8} sm={8} md={8} lg={8}>
-                {this.props.text}   
+                <Col xs={6} sm={6} md={9} lg={9}>
+                <div style ={leftDivStyle}>
+                    {this.props.text}   
+                    <br/>
+                    <br/>
+                    </div>    
                 </Col>
+                
             </Row>
             </Grid>
-            </div>
+            
         );
        
     }

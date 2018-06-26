@@ -77,6 +77,9 @@ export default class VotingListDealer extends React.Component{
                 }
             } 
         }
+
+        votes = votes.sort(function(a,b) {return (a.votes < b.votes) ? 1 : ((b.votes < a.votes) ? -1 : 0);} );
+
         //alert(JSON.stringify(votes));
 
         // alert (inputs);

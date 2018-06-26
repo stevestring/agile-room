@@ -109,17 +109,34 @@ export default class VotingList extends React.Component{
     render() {
 
         //alert(this.props.roomInputs);
-        if (this.props.activityState==="V" && this.props.roomInputs !== null )        
+        if (this.props.activityState==="V" && this.props.roomInputs !== null ) //Voting phase       
         {
             const inputs = this.props.roomInputs.sort(function(a,b) {return (a.Datemodified > b.Datemodified) ? 1 : ((b.Datemodified > a.Datemodified) ? -1 : 0);} );
+            var votes = inputs;
+            console.log (this.state.Votes);
+
+                
+                for (let v = 0; v < votes.length; v++) { 
+                votes[v]["votes"]=0;
+                    if (typeof this.state.Votes !== "undefined") 
+                    {
+                        for (let i = 0; i < this.state.Votes.length; i++) { 
+                            console.log (this.state.Votes[i]);
+                            if (votes[v].RoomInputId === this.state.Votes[i].RoomInputId) {
+                                votes[v].votes = this.state.Votes[i].Votes;
+                            }
+                        }
+                } 
+            }
 
             return (
                 <div>
                     <p className="App-title">             
-                        (Vote)
+                        (Voting)
                     </p> 
+                    <br/>
                     <div className="Cards">
-                        {inputs.map(c => <VotingListItem roomInputId = {c.RoomInputId} text={c.Input} faceDown={this.state.faceDown}  
+                        {votes.map(c => <VotingListItem roomInputId = {c.RoomInputId} votes = {c.votes} text={c.Input} faceDown={this.state.faceDown}  
                         onChange={this.handleVote} remainingVotes={this.remainingVotes()}>  </VotingListItem>)}
                     </div>
                 </div>

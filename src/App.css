@@ -219,3 +219,19 @@
   color: inherit;
   text-decoration: inherit;
 }
+
+.VotingButtons
+{
+  font-size: x-large;  
+}
+
+.VotingButtonArrow
+{
+  cursor:pointer;
+}
+
+.VotingButtonArrowDisabled
+{
+  color:grey;
+  cursor:not-allowed;
+}
