@@ -45,7 +45,7 @@ export default class VotingListItem extends React.Component{
                     
                 </div>
                 </Col>
-                <Col xs={6} sm={6} md={9} lg={9}>
+                <Col xs={8} sm={8} md={9} lg={9}>
                 <div style ={leftDivStyle}>
                     {this.props.text}   
                     <br/>

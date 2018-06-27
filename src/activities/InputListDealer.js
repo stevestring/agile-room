@@ -36,7 +36,7 @@ export default class InputListDealer extends React.Component{
         
         // this.setState({ faceDown:true });
         this.props.onReset();
-        
+        this.setState({faceDown:true});
     }
 
     showCards()

@@ -148,11 +148,11 @@ class Dealer extends Component {
     }
     else if (this.state.activity==="www")
     {
-      activityName = "What Went Well?"
+      activityName = "What Went Well"
     }
     else if (this.state.activity==="wwr")
     {
-      activityName = "What Went Wrong?"
+      activityName = "What Went Wrong"
     }
     else if (this.state.activity==="ii")
     {

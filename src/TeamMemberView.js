@@ -14,7 +14,7 @@ class TeamMemberView extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {activity:null, lastMessageId:null, activityState:null, roomInputs:null};
+    this.state = {activity:null, lastMessageId:null, activityState:null, roomInputs:null, player:null};
     subscribeToRoomChanges(this.props.room, (err,room) => this.loadData());
     //subscribeToRoomInputChanges(this.props.room, (err,room) => this.loadRoomInputs());
   }
@@ -68,7 +68,7 @@ class TeamMemberView extends Component {
       return (      
         <div className="App">
           <NavBar room={this.props.room}/>  
-          <ActivityHeader activityName="What Went Well?"/>
+          <ActivityHeader activityName="What Went Well"/>
           <InputList ref="child" room={this.props.room}/>
         </div>
     );    
@@ -78,7 +78,7 @@ class TeamMemberView extends Component {
       return (      
         <div className="App">
           <NavBar room={this.props.room}/>  
-          <ActivityHeader activityName="What Went Wrong?"/>
+          <ActivityHeader activityName="What Went Wrong"/>
           <InputList ref="child" room={this.props.room}/>
         </div>
     );    
@@ -90,12 +90,24 @@ class TeamMemberView extends Component {
           <NavBar room={this.props.room}/>  
           <ActivityHeader activityName="Improvement Ideas"/>
           {/* <h1>{this.state.activityState}</h1> */}
-          <VotingList ref="child" room={this.props.room} roomInputs ={this.state.roomInputs} activityState = {this.state.activityState} maxVotes="3"/>
+          <VotingList ref="child" room={this.props.room} player ={this.state.player} roomInputs ={this.state.roomInputs} activityState = {this.state.activityState} maxVotes="3"/>
         </div>
     );    
     }
   }
-  componentDidMount(){        
+  componentDidMount(){  
+    var playerId =sessionStorage.getItem('player');
+    //alert("getting player:" +playerId );
+    // alert ( playerId==="null" );
+    // alert("getting player:" +playerId );
+    if ( playerId==="null" || playerId===null)
+    {
+      playerId = Math.floor(Math.random()*1000);      
+      //alert("setting player:" +playerId );
+      sessionStorage.setItem('player',playerId);
+    }
+    this.setState({player:playerId });
+    //alert(this.state.player );
     this.loadData();
     this.loadRoomInputs();
   }

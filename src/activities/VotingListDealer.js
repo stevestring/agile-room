@@ -35,14 +35,14 @@ export default class VotingListDealer extends React.Component{
     {
         
         this.props.onReset();
-        
+        this.setState({faceDown:true});
     }
 
     changeState()
     {
         
         this.props.onActivityStateChange("V");
-        
+        this.setState({faceDown:false});
     }
 
     showCards()

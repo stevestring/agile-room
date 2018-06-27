@@ -21,7 +21,7 @@ var settings = require( '../settings');
 export default class VotingList extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {userInput:"", player: Math.floor(Math.random()*1000), lastMessageId:null, votes:[]};
+        this.state = {userInput:"", lastMessageId:null, votes:[]};
         this.handleSubmit= this.handleSubmit.bind(this);
         this.handleVote = this.handleVote.bind(this);
     }
@@ -64,6 +64,7 @@ export default class VotingList extends React.Component{
     {
         return this.props.maxVotes - this.totalVotes();
     }
+
     handleVote(itemId, votes) {
         var that = this;
         //alert ("Voting: "+itemId + ":" + votes);
@@ -87,10 +88,10 @@ export default class VotingList extends React.Component{
         }
         //alert (jsonObj);
 
-        //alert(this.state.player);
-        if (this.state.player !=  null)
+        //alert(this.props.player);
+        if (this.props.player !=  null)
         {
-            axios.put((settings.serverurl+'/player-input/'+this.props.room +'/'+this.state.player), ({PlayerInput: jsonObj}))
+            axios.put((settings.serverurl+'/player-input/'+this.props.room +'/'+this.props.player), ({PlayerInput: jsonObj}))
                 .then(function (response) {
                     console.log(response);
                 })
@@ -109,6 +110,8 @@ export default class VotingList extends React.Component{
     render() {
 
         //alert(this.props.roomInputs);
+        //alert(JSON.stringify(this.props));
+
         if (this.props.activityState==="V" && this.props.roomInputs !== null ) //Voting phase       
         {
             const inputs = this.props.roomInputs.sort(function(a,b) {return (a.Datemodified > b.Datemodified) ? 1 : ((b.Datemodified > a.Datemodified) ? -1 : 0);} );

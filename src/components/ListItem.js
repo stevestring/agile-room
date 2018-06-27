@@ -9,7 +9,7 @@ export default class ListItem extends React.Component{
         var itemText = this.props.text;
         if  (this.props.faceDown)
         {
-            itemText = "x".repeat(5);
+            itemText = "x".repeat(itemText.length);
         }
         const leftDivStyle = {
             "text-align": "left",
@@ -19,7 +19,8 @@ export default class ListItem extends React.Component{
             "text-align": "right"
         };
         //TODO: should this really be two components?
-        if (this.props.votes !== null) {
+        //alert (this.props.votes);
+        if (this.props.votes !== null && typeof this.props.votes !== "undefined") {
             return (
                 <Grid>
                 <Row>   
@@ -29,9 +30,9 @@ export default class ListItem extends React.Component{
                     <Label> {this.props.votes}</Label>
                     </div>
                 </Col>
-                <Col xs={7} sm={7} md={9} lg={9}>
+                <Col xs={8} sm={8} md={9} lg={9}>
                 <div style ={leftDivStyle}>
-                    {this.props.text} <br/><br/>
+                {itemText} <br/><br/>
                     </div>
                 </Col>
                 </Row>
@@ -40,9 +41,16 @@ export default class ListItem extends React.Component{
         }
         else {
             return (
-                <div>
-                    <div>{this.props.votes +":"+ this.props.text}</div>                                 
-                </div>
+                <Grid>
+                <Row>   
+                <Col hidden-xs hidden-sm md={3} lg={3}/>
+                <Col xs={6} sm={6} md={6} lg={6}>
+                <div style ={leftDivStyle}>
+                {itemText} <br/><br/>
+                    </div>
+                </Col>
+                </Row>
+                </Grid>
             );
         }
         
