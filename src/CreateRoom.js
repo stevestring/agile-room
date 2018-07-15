@@ -2,20 +2,16 @@ import React, { Component } from 'react';
 import ActivityHeader from '../src/components/ActivityHeader';
 import axios from "axios/index";
 import NavBar from "./NavBar";
-import RoomHeader from "./RoomHeader";
+
 import './bootstrap.min.css';
 import './App.css';
 import { FormGroup } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
-import { Alert } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { FormControl } from 'react-bootstrap';
 import { ControlLabel } from 'react-bootstrap';
-import { HelpBlock } from 'react-bootstrap';
 import { Grid } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
-import { PageHeader } from 'react-bootstrap';
 var settings = require( './settings');
 
 
@@ -69,8 +65,6 @@ jumptoDealer()
 
   render() {
 
-    const inRoom = this.state.room != null;
-    
     return (
       <div className="App">
       <NavBar room = {this.state.room}/>
