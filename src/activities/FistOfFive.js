@@ -6,14 +6,14 @@ var settings = require( '../settings');
 export default class FistOfFive extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {selectedItem:null, player: Math.floor(Math.random()*1000), lastMessageId:null};
+        this.state = {selectedItem:null, lastMessageId:null};
     }
 
     handleClick(param, e)  {        
 
-        if (this.state.player !=  null)
+        if (this.props.player !=  null)
         {
-            axios.put((settings.serverurl+'/player-input/'+this.props.room +'/'+this.state.player), ({Card: param}))
+            axios.put((settings.serverurl+'/player-input/'+this.props.room +'/'+this.props.player), ({Card: param}))
                 .then(function (response) {
                     console.log(response);
                 })

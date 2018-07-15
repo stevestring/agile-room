@@ -49,7 +49,7 @@ class TeamMemberView extends Component {
           <div className="App">
             <NavBar room={this.props.room}/>  
             <ActivityHeader activityName="Planning Poker"/>
-            <PlanningPoker ref="child" room={this.props.room}/>
+            <PlanningPoker ref="child" player ={this.state.player} room={this.props.room}/>
           </div>
       );
     }
@@ -59,7 +59,7 @@ class TeamMemberView extends Component {
         <div className="App">
           <NavBar room={this.props.room}/>  
           <ActivityHeader activityName="Fist Of Five"/>
-          <FistOfFive ref="child" room={this.props.room}/>
+          <FistOfFive ref="child" player ={this.state.player} room={this.props.room}/>
         </div>
     );
     }
@@ -69,7 +69,7 @@ class TeamMemberView extends Component {
         <div className="App">
           <NavBar room={this.props.room}/>  
           <ActivityHeader activityName="What Went Well"/>
-          <InputList ref="child" room={this.props.room}/>
+          <InputList ref="child" player ={this.state.player} room={this.props.room}/>
         </div>
     );    
     }
@@ -79,7 +79,7 @@ class TeamMemberView extends Component {
         <div className="App">
           <NavBar room={this.props.room}/>  
           <ActivityHeader activityName="What Went Wrong"/>
-          <InputList ref="child" room={this.props.room}/>
+          <InputList ref="child" player ={this.state.player} room={this.props.room}/>
         </div>
     );    
     }
