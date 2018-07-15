@@ -13,6 +13,7 @@ import { Alert } from 'react-bootstrap';
 import { Label } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap';
 import { MenuItem } from 'react-bootstrap';
 import { DropdownButton } from 'react-bootstrap';
 import {subscribeToPlayerInputChanges} from './api.js';
@@ -136,6 +137,10 @@ class Dealer extends Component {
   }
   render() {
 
+    const rightDivStyle = {
+      "text-align": "right"
+    };
+
     var activityName = "-"
     var activityState = null;
     if (this.state.activity==="pp")
@@ -164,8 +169,8 @@ class Dealer extends Component {
     }
     return (
       <div className="App">
-      <NavBar dealer="true" room={this.props.room} onActivityChange ={this.handleActivtyChange}/>
-      
+      <NavBar dealer="true" room={this.props.room}/>
+  <Grid>    
       {this.state.showAlert?(
         <Alert onDismiss={this.handleDismiss}>
             <h4>Congratulations! You just created a room!</h4>
@@ -175,14 +180,8 @@ class Dealer extends Component {
        )
       }
 
-      <Row>
-        <Col xs={3} md={3}/>
-        <Col xs={6} md={6}>
-        <h1 className = "activityHeader">{activityName}</h1>
-        <h3>{activityState}</h3> 
-        </Col>
-        
-        <Col xs={3} md={3}>
+      <Row > 
+      <Col smHidden mdHidden lgHidden xlHidden xs={12}>
         <DropdownButton
           title={activityName}
           key={1}
@@ -197,7 +196,30 @@ class Dealer extends Component {
         </Col>
       </Row>
 
+      <Row >        
+        <Col xsHidden sm={3}/>
+        <Col sm={6}>       
+          <h1 className = "activityHeader">{activityName}</h1>
+          <h3>{activityState}</h3> 
+          <br/>
+        </Col>
+        <Col xsHidden sm={3}>
         <br/>
+        <DropdownButton
+          title={activityName}
+          key={1}
+          id={`dropdown-activty`}
+        >
+            <MenuItem eventKey="0" onSelect={this.handleActivityChange}>Planning Poker</MenuItem>
+            <MenuItem eventKey="1"onSelect={this.handleActivityChange} >Fist of Five</MenuItem>
+            <MenuItem eventKey="2" onSelect={this.handleActivityChange}>What Went Well</MenuItem>
+            <MenuItem eventKey="3"onSelect={this.handleActivityChange} >What Went Wrong</MenuItem>
+            <MenuItem eventKey="4"onSelect={this.handleActivityChange} >Improvement Ideas</MenuItem>
+        </DropdownButton>
+        </Col>
+      </Row>
+
+</Grid>
 
       {(this.state.activity=="pp") &&
         <PlanningPokerDealer cards = {this.state.playerInputs}  onReset = {this.handleReset} />
@@ -216,7 +238,8 @@ class Dealer extends Component {
           activityState={this.state.activityState} onActivityStateChange = {this.handleActivityStateChange}/>
       }
 
-      </div>
+     </div>
+      
     );
   }
 

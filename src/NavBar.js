@@ -33,14 +33,11 @@ export default class NavBar extends React.Component{
                     { hasRoom? (
                        
                         <Nav pullRight >       
-                                                <Navbar.Brand>
+                        <Navbar.Brand>
                         <a href="/" ><div className="brand">Room: {this.props.room}</div></a>
                         </Navbar.Brand>                  
-                        {/* <NavItem eventKey={1} href="#" >Room: {this.props.room}</NavItem>                         */}
-                        </Nav>  
-                        
-                                     
-                    ):(<div/>)
+                        </Nav>      
+                    ):(<div/>) //No Room # to show
                     } 
 
                     </Navbar> 
