@@ -96,6 +96,10 @@ jumptoDealer()
             <FormControl componentClass="select" placeholder="Planning Poker" onChange={this.handleActivityChange}>
                                 <option value="pp">Planning Poker</option>
                                 <option value="ff">Fist Of Five</option>
+                                <option value="www">What Went Well</option>
+                                <option value="wwr">What What Wrong</option>
+                                <option value="ii">Improvement Ideas</option>
+
                               </FormControl>
             </Col>
           </FormGroup>

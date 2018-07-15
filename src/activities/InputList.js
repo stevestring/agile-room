@@ -11,6 +11,7 @@ import { Grid } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { InputGroup } from 'react-bootstrap';
+import RoomInputForm from "../components/RoomInputForm";
 var uuid = require('uuid');
 
 
@@ -19,8 +20,7 @@ var settings = require( '../settings');
 export default class InputList extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {userInput:"", lastMessageId:null};
-        this.handleInputChange = this.handleInputChange.bind(this);
+        this.state = { lastMessageId:null};
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -28,27 +28,23 @@ export default class InputList extends React.Component{
         this.setState({userInput : ""});
     }
 
-    handleSubmit() {
+    handleSubmit(userInput) {
+
         var that = this;
         //alert ("Submitting: "+this.state.userInput);
         // var uuid1 = uuid.v1();
 
         var uuid1 = Math.floor(Math.random()*10000);
         // //Call API
-        axios.put((settings.serverurl+'/room-input/'+this.props.room +'/'+uuid1), ({Input: this.state.userInput}))
+        axios.put((settings.serverurl+'/room-input/'+this.props.room +'/'+uuid1), ({Input: userInput}))
         .then(function (response) {     
-            that.setState({userInput:""});
+            
         })
         .catch(function (error) {
             console.log(error);
-            alert (error);
+            alert (JSON.stringify(error));
         });
 
-    }
-
-    handleInputChange(event)
-    {
-        this.setState({userInput: event.target.value});
     }
 
     loadData(){
@@ -73,7 +69,6 @@ export default class InputList extends React.Component{
 
     }
 
-
     render() {
 
         return (
@@ -81,26 +76,7 @@ export default class InputList extends React.Component{
                 <br/>
                 <br/>
                 <div/>
-                        {/* <Grid>
-                        <Form inline >
-                        <FormGroup bsSize="large"  >
-                            <FormControl  type="text" value = {this.state.userInput} onChange={this.handleInputChange}/>{" "}
-                            <Button type="button" bsSize="large" onClick={()=> this.handleSubmit()}>Submit</Button>
-                        </FormGroup>
-                        </Form>
-                        </Grid> */}
-                        <Grid>
-                        <Form  >
-                        <FormGroup onSubmit={()=> this.handleSubmit()}>
-                        <InputGroup>
-                        <FormControl  type="text" value = {this.state.userInput} onChange={this.handleInputChange}/>                        
-                        <InputGroup.Button>
-                            <Button type="submit" onClick={()=> this.handleSubmit()}>Submit</Button>
-                        </InputGroup.Button>
-                        </InputGroup>
-                        </FormGroup>
-                        </Form>
-                        </Grid>
+                        <RoomInputForm onSubmit={this.handleSubmit}/>
             </div>
 
         );

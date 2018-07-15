@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import PlanningPokerDealer from "./activities/PlanningPokerDealer";
 import FistOfFiveDealer from "./activities/FistOfFiveDealer";
 import InputListDealer from "./activities/InputListDealer";
+import VotingListDealer from "./activities/VotingListDealer";
 import axios from "axios/index";
 import NavBar from "./NavBar";
 import './bootstrap.min.css';
@@ -12,7 +13,7 @@ import { Alert } from 'react-bootstrap';
 import { Label } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap';
 import { MenuItem } from 'react-bootstrap';
 import { DropdownButton } from 'react-bootstrap';
 import {subscribeToPlayerInputChanges} from './api.js';
@@ -25,10 +26,11 @@ class Dealer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {showAlert:true, activity:null, playerInputs:[],roomInputs:[]}
+    this.state = {showAlert:true, activity:null, activityState:"NEW", playerInputs:[],roomInputs:[]}
     this.handleActivityChange = this.handleActivityChange.bind(this);
     this.handleDismiss = this.handleDismiss.bind(this);
     this.handleReset = this.handleReset.bind(this);
+    this.handleActivityStateChange = this.handleActivityStateChange.bind(this);
 
     subscribeToPlayerInputChanges(this.props.room, (err,room) => this.loadData());
     subscribeToRoomInputChanges(this.props.room, (err,room) => this.loadRoomInputs());
@@ -53,7 +55,6 @@ class Dealer extends Component {
               .catch(err => console.log(err));
       }
 
-      // alert("loading player data");
   }
 
   loadRoomInputs()
@@ -66,7 +67,6 @@ class Dealer extends Component {
               .catch(err => console.log(err));
       }
 
-      // alert("loading player data");
   }
 
 
@@ -86,10 +86,8 @@ class Dealer extends Component {
         .then(res => this.setState({ roomInputs:[]}))   
         .catch(err => alert(err));
 
-
-
         //alert(this.state.activity);
-        axios.put(settings.serverurl +'/room/' +this.props.room, ({messageid: Date.now(), message:"NH", activity:this.state.activity}))
+        axios.put(settings.serverurl +'/room/' +this.props.room, ({messageid: Date.now(), message:"NH", activity:this.state.activity, activitystate:"NEW"}))
             .catch(err => alert(err));
 
            
@@ -99,55 +97,80 @@ class Dealer extends Component {
   handleActivityChange ( eventKey) {
 
       //alert ( eventKey);
-      var eventCode = "pp";
-      if (eventKey==0)
+      var eventCode = null;
+      if (eventKey==="0")
       {
         eventCode = "pp";    
       }
-      else if (eventKey==1)
+      else if (eventKey==="1")
       {
         eventCode = "ff";
         
       }
-      else if (eventKey==2)
+      else if (eventKey==="2")
       {
         eventCode = "www";
         
       }
-      else if (eventKey==3)
+      else if (eventKey==="3")
       {
         eventCode = "wwr";        
       }
+      else if (eventKey==="4")
+      {
+        eventCode = "ii";        
+      }
 
-
+      //alert( eventCode);
       this.setState({activity: eventCode},this.handleReset);
 
   }
+  
+  handleActivityStateChange ( activityState) {
 
+        //alert(this.state.activity);
+    axios.put(settings.serverurl +'/room/' +this.props.room, ({messageid: Date.now(), message:"SC", activity:this.state.activity, activitystate:activityState}))
+            .catch(err => alert(err));
+
+    this.setState({activityState: activityState});
+
+  }
   render() {
 
+    const rightDivStyle = {
+      "text-align": "right"
+    };
+
     var activityName = "-"
-    if (this.state.activity=="pp")
+    var activityState = null;
+    if (this.state.activity==="pp")
     {
       activityName = "Planning Poker"
     }
-    else if (this.state.activity=="ff")
+    else if (this.state.activity==="ff")
     {
       activityName = "Fist Of Five"
     }
-    else if (this.state.activity=="www")
+    else if (this.state.activity==="www")
     {
-      activityName = "What Went Well?"
+      activityName = "What Went Well"
     }
-    else if (this.state.activity=="wwr")
+    else if (this.state.activity==="wwr")
     {
-      activityName = "What Went Wrong?"
+      activityName = "What Went Wrong"
     }
-
+    else if (this.state.activity==="ii")
+    {
+      activityName = "Improvement Ideas"
+      if (this.state.activityState==="V")
+      {
+        activityState = "(Voting)";
+      }
+    }
     return (
       <div className="App">
-      <NavBar dealer="true" room={this.props.room} onActivityChange ={this.handleActivtyChange}/>
-      
+      <NavBar dealer="true" room={this.props.room}/>
+  <Grid>    
       {this.state.showAlert?(
         <Alert onDismiss={this.handleDismiss}>
             <h4>Congratulations! You just created a room!</h4>
@@ -157,9 +180,8 @@ class Dealer extends Component {
        )
       }
 
-      <Row>
-        <Col xs={3} md={3}/>
-        <Col xs={6} md={6}><h1 className = "activityHeader">{activityName}</h1></Col>
+      <Row > 
+      <Col smHidden mdHidden lgHidden xlHidden xs={12}>
         <DropdownButton
           title={activityName}
           key={1}
@@ -169,25 +191,55 @@ class Dealer extends Component {
             <MenuItem eventKey="1"onSelect={this.handleActivityChange} >Fist of Five</MenuItem>
             <MenuItem eventKey="2" onSelect={this.handleActivityChange}>What Went Well</MenuItem>
             <MenuItem eventKey="3"onSelect={this.handleActivityChange} >What Went Wrong</MenuItem>
+            <MenuItem eventKey="4"onSelect={this.handleActivityChange} >Improvement Ideas</MenuItem>
         </DropdownButton>
+        </Col>
       </Row>
 
+      <Row >        
+        <Col xsHidden sm={3}/>
+        <Col sm={6}>       
+          <h1 className = "activityHeader">{activityName}</h1>
+          <h3>{activityState}</h3> 
+          <br/>
+        </Col>
+        <Col xsHidden sm={3}>
         <br/>
+        <DropdownButton
+          title={activityName}
+          key={1}
+          id={`dropdown-activty`}
+        >
+            <MenuItem eventKey="0" onSelect={this.handleActivityChange}>Planning Poker</MenuItem>
+            <MenuItem eventKey="1"onSelect={this.handleActivityChange} >Fist of Five</MenuItem>
+            <MenuItem eventKey="2" onSelect={this.handleActivityChange}>What Went Well</MenuItem>
+            <MenuItem eventKey="3"onSelect={this.handleActivityChange} >What Went Wrong</MenuItem>
+            <MenuItem eventKey="4"onSelect={this.handleActivityChange} >Improvement Ideas</MenuItem>
+        </DropdownButton>
+        </Col>
+      </Row>
+
+</Grid>
 
       {(this.state.activity=="pp") &&
-        <PlanningPokerDealer cards = {this.state.playerInputs}  onReset = {this.handleReset} roomstate="0"/>
+        <PlanningPokerDealer cards = {this.state.playerInputs}  onReset = {this.handleReset} />
       }
       {(this.state.activity=="ff") &&
-        <FistOfFiveDealer cards = {this.state.playerInputs}  onReset = {this.handleReset} roomstate="0"/>
+        <FistOfFiveDealer cards = {this.state.playerInputs}  onReset = {this.handleReset} />
       }
       {(this.state.activity=="www") &&
-        <InputListDealer roomInputs = {this.state.roomInputs}  onReset = {this.handleReset} roomstate="0"/>
+        <InputListDealer roomInputs = {this.state.roomInputs}  onReset = {this.handleReset} />
       }
       {(this.state.activity=="wwr") &&
-        <InputListDealer roomInputs = {this.state.roomInputs}  onReset = {this.handleReset} roomstate="0"/>
+        <InputListDealer roomInputs = {this.state.roomInputs}  onReset = {this.handleReset} />
+      }
+      {(this.state.activity=="ii") &&
+        <VotingListDealer roomInputs = {this.state.roomInputs}  onReset = {this.handleReset} playerInputs = {this.state.playerInputs}
+          activityState={this.state.activityState} onActivityStateChange = {this.handleActivityStateChange}/>
       }
 
-      </div>
+     </div>
+      
     );
   }
 
