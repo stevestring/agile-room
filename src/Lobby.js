@@ -39,8 +39,7 @@ class Lobby extends Component {
   loadData()
   {
 
-
-          axios.get(settings.serverurl+'/room/' )
+          axios.get(settings.serverurl+'/room' )
               .then(res => this.setState({ rooms:res.data.Items }))
               .catch(err => console.log(err));
 
