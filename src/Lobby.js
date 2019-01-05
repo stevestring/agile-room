@@ -63,17 +63,8 @@ class Lobby extends Component {
         <br/>
                 <Grid>
                 <Row>
-                {this.state.rooms.map(r => <Room room={r.RoomId} roomName={r.Name}></Room>)}
-   
-                
+                {this.state.rooms.map(r => <Room room={r.RoomId} roomName={r.Name} roomType='room'></Room>)}
 
-
-                {/* <Form inline onSubmit={this.handleSubmit}>
-                    <FormGroup controlId="roomNumber" bsSize="lg">
-                        <FormControl type="text" name="roomNumber" placeholder="Enter room number" onChange={this.handleChange}/>
-                    </FormGroup>{' '}
-                    <Button bsSize="lg" type="submit">Go</Button>
-                </Form> */}
 
 </Row>
 
