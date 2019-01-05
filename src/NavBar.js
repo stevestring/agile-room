@@ -28,8 +28,11 @@ export default class NavBar extends React.Component{
                         <Navbar.Brand>
                         <a href="/" ><div className="brand">Team Room</div></a>
                         </Navbar.Brand> 
-                       
-
+                        <Nav>
+                        <NavItem eventKey={1} href="/about">
+                            About
+                        </NavItem>
+                        </Nav>
                     { hasRoom? (
                        
                         <Nav pullRight >       
