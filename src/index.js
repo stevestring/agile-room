@@ -8,6 +8,7 @@ import TeamMemberView from './TeamMemberView';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Lobby from './Lobby';
+import About from './About';
 import CreateRoom from './CreateRoom';
 import NavBar from "./NavBar";
 
@@ -21,6 +22,7 @@ ReactDOM.render((
             <Route path="/create-room" component={CreateRoom}/>            
             <Route path="/room/:id" render={(props) => <TeamMemberView room={props.match.params.id}/>} />
             <Route path="/dealer/:id" render={(props) => <Dealer room={props.match.params.id}/>} />
+            <Route path="/About" component={About}/>  
         </div>
     </Router>
 ), document.getElementById('root'))
