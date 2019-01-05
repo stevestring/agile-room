@@ -16,6 +16,7 @@ import { Grid } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { PageHeader } from 'react-bootstrap';
+import Room from "./Room";
 var settings = require( './settings');
 
 
@@ -23,13 +24,18 @@ class CreateRoom extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {room: Math.floor(Math.random()*100), activity:"pp", roomname:null};
+    this.state = {room: Math.floor(Math.random()*1000), activity:"pp", roomname:null,rooms:[] };
     this.handleRoomNameChange = this.handleRoomNameChange.bind(this);
     this.handleActivityChange = this.handleActivityChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.jumptoDealer = this.jumptoDealer.bind(this);
   }
 
+  componentDidMount(){
+
+    this.loadData();
+
+  }
 
   handleRoomNameChange(event) {
     this.setState({roomname: event.target.value});
@@ -59,6 +65,15 @@ handleSubmit() {
     
 }
 
+loadData()
+{
+
+        axios.get(settings.serverurl+'/room' )
+            .then(res => this.setState({ rooms:res.data.Items }))
+            .catch(err => console.log(err));
+
+}
+
 jumptoDealer()
 {
     //Navgate to Dealer (Supply room)
@@ -68,7 +83,7 @@ jumptoDealer()
 }
 
   render() {
-
+    let subHeaderStyle = { fontSize: 32 }
     const inRoom = this.state.room != null;
     
     return (
@@ -76,6 +91,7 @@ jumptoDealer()
       <NavBar room = {this.state.room}/>
       
       <ActivityHeader activityName="Create a Room"/>
+                <br/>
                 <br/>
         <Grid>
         <Form horizontal onSubmit={this.handleSubmit}>
@@ -110,8 +126,20 @@ jumptoDealer()
             </Col>
           </FormGroup>
       </Form>
-
         </Grid>
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <h1 style={subHeaderStyle} className = "activityHeader"  >Or... Select Existing Room</h1>
+        
+        <br/>
+                <Grid>
+                  <Row>
+                  {this.state.rooms.map(r => <Room room={r.RoomId} roomName={r.Name} roomType='dealer'></Room>)}
+                  </Row>
+                </Grid>
       </div>
     );
   }
