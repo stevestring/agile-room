@@ -30,7 +30,7 @@ class About extends Component {
       
       <div className="App">
       <NavBar/>
-      <ActivityHeader activityName="About Team-Room"/>
+      <ActivityHeader activityName="About Us"/>
       <br/>
       <br/>
       <Grid>
