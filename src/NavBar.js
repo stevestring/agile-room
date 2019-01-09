@@ -29,11 +29,16 @@ export default class NavBar extends React.Component{
                         </Navbar.Brand>                  
                         </Nav>      
                     ):(<div>
+                          <Navbar.Collapse>
                           <Nav>
                         <NavItem eventKey={1} href="/about">
                             About
                         </NavItem>
+                        <NavItem eventKey={1} href="/faq">
+                            FAQ
+                        </NavItem>
                         </Nav>
+                        </Navbar.Collapse>
                         </div>) //No Room # to show
                     } 
 

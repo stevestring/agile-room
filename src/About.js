@@ -32,7 +32,6 @@ class About extends Component {
       <NavBar/>
       <ActivityHeader activityName="About Us"/>
       <br/>
-      <br/>
       <Grid>
 <div style ={leftDivStyle}>
 <p>Team-room.com is set of online collaboration tools designed for Agile teams.  Some of the tools were designed to be used within specific agile ceremonies (Planning Poker, Fist of Five) but others could be useful for any type of collaborative meeting (What Went Well, Ideas for Improvement) </p>
@@ -45,7 +44,7 @@ class About extends Component {
 <br/>
 <p>I hope you enjoy using team-room.com for your team!  As long as I can manage the costs, it is free for anybody to use.  If you have a great experience, I'd love to hear your feedback.  This is a labor of love for me... learning, positive feedback, and satisfaction of building something that used by others is the primary motivation.</p>
 <br/>
-<p>*Special thanks to Ashley-Christian Hardy for the great images that I borrowed from <a href="https://medium.com/@achardypm">his Agile blog on Medium.</a></p>
+<p>*Special thanks to Ashley-Christian Hardy for the images that I borrowed from <a href="https://medium.com/@achardypm">his Agile blog on Medium.</a></p>
 
         <br/>
         <br/>
