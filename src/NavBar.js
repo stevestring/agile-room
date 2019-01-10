@@ -23,11 +23,17 @@ export default class NavBar extends React.Component{
                         </Navbar.Brand> 
                       
                     { hasRoom? (
-                        <Nav pullRight >       
+                   // <Navbar.Collapse>
+                        <Nav pullRight >  
+                             
                         <Navbar.Brand>
-                        <a href="/" ><div className="brand">Room: {this.props.room}</div></a>
+                        {/* Why is this a needed for font size? */}
+                        <a href="" > 
+                        <div className="brand">{this.props.room}</div>
+                        </a>
                         </Navbar.Brand>                  
                         </Nav>      
+                     //   </Navbar.Collapse>
                     ):(<div>
                           <Navbar.Collapse>
                           <Nav>
