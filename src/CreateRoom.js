@@ -2,20 +2,16 @@ import React, { Component } from 'react';
 import ActivityHeader from '../src/components/ActivityHeader';
 import axios from "axios/index";
 import NavBar from "./NavBar";
-import RoomHeader from "./RoomHeader";
 import './bootstrap.min.css';
 import './App.css';
 import { FormGroup } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
-import { Alert } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { FormControl } from 'react-bootstrap';
 import { ControlLabel } from 'react-bootstrap';
-import { HelpBlock } from 'react-bootstrap';
 import { Grid } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
-import { PageHeader } from 'react-bootstrap';
 import Room from "./Room";
 var settings = require( './settings');
 
@@ -27,6 +23,7 @@ class CreateRoom extends Component {
     this.state = {room: Math.floor(Math.random()*1000), activity:"pp", roomname:null,rooms:[] };
     this.handleRoomNameChange = this.handleRoomNameChange.bind(this);
     this.handleActivityChange = this.handleActivityChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.jumptoDealer = this.jumptoDealer.bind(this);
   }
@@ -40,7 +37,9 @@ class CreateRoom extends Component {
   handleRoomNameChange(event) {
     this.setState({roomname: event.target.value});
   }
-
+  handlePasswordChange(event) {
+    this.setState({password: event.target.value});
+  }
   handleActivityChange(event) {
     this.setState({activity: event.target.value});
   }
@@ -49,10 +48,11 @@ class CreateRoom extends Component {
 handleSubmit() {
     this.setState({roomname: this.state.roomname});
     this.setState({activity: this.state.activity});
+    this.setState({password: this.state.password});
     var that = this;
 
     // //Call API
-    axios.put((settings.serverurl+'/room/'+this.state.room ), {name: this.state.roomname, activity:this.state.activity, activitystate:0})
+    axios.put((settings.serverurl+'/room/'+this.state.room ), {name: this.state.roomname, activity:this.state.activity, activitystate:0, password:this.state.password})
         .then( res=> that.props.history.push("/dealer/"+that.state.room)
       )    
     .catch(function (error) {
@@ -104,7 +104,7 @@ jumptoDealer()
             </Col>
           </FormGroup>
 
-          <FormGroup controlId="formHorizontalPassword">
+          <FormGroup controlId="formHorizontalActivity">
             <Col componentClass={ControlLabel} sm={4}>
               Starting Activity
             </Col>
@@ -119,7 +119,14 @@ jumptoDealer()
                               </FormControl>
             </Col>
           </FormGroup>
-
+          <FormGroup controlId="formHorizontalPassword" >
+            <Col componentClass={ControlLabel} sm={4}>
+            Password
+            </Col>
+            <Col sm={4}>
+              <FormControl type="text" placeholder="Enter room password... " onChange={this.handlePasswordChange}/>
+            </Col>
+          </FormGroup>
           <FormGroup style={{textAlign: "left"}}>
             <Col smOffset={4} sm={4}>
               <Button type="button" onClick={this.handleSubmit}>OK</Button>
