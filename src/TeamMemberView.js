@@ -6,6 +6,7 @@ import InputList from "./activities/InputList";
 import VotingList from "./activities/VotingList";
 import axios from "axios/index";
 import NavBar from "./NavBar";
+import Login from "./components/Login";
 import {subscribeToRoomChanges} from './api.js';
 import ActivityHeader from '../src/components/ActivityHeader';
 var settings = require( './settings');
@@ -14,7 +15,8 @@ class TeamMemberView extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {activity:null, lastMessageId:null, activityState:null, roomInputs:null, player:null};
+    this.state = {activity:null, lastMessageId:null, activityState:null, roomInputs:null, player:null, loggedIn:null};
+    this.handleLogin = this.handleLogin.bind(this);
     subscribeToRoomChanges(this.props.room, (err,room) => this.loadData());
     //subscribeToRoomInputChanges(this.props.room, (err,room) => this.loadRoomInputs());
   }
@@ -32,6 +34,13 @@ class TeamMemberView extends Component {
 
   }
 
+  handleLogin()
+  {
+    //alert ("loggedIn==true");
+    this.setState({loggedIn:true});
+    this.loadData();
+  }
+
   render() {
 
     if (this.state.activity===null)
@@ -42,7 +51,16 @@ class TeamMemberView extends Component {
           </div>
       );
     }
-
+    else if (this.state.activity==="li")
+    {
+      return (      
+          <div className="App">
+            <NavBar room={this.props.room}/>  
+            <ActivityHeader activityName="Login"/>
+            <Login ref="child" password={this.state.password} onSubmit={this.handleLogin}/>
+          </div>
+      );
+    }
     else if (this.state.activity==="pp")
     {
       return (      
@@ -126,13 +144,19 @@ class TeamMemberView extends Component {
     {
         axios.get(settings.serverurl+'/room/'+ this.props.room )
             .then(res => {
-              if (res.data.Activity !== this.state.Activity ){ //Is there a new message
+              if (res.data.Password != null 
+                && this.state.loggedIn != true){ //Is there a new message
+                {
+                  this.setState({password:res.data.Password});
+                  this.setState({activity:"li"});                  
+                }
+              }           
+              else if (res.data.Activity !== this.state.Activity ){ //Is there a new message
                 {
                   this.setState({activity:res.data.Activity});                  
                 }
               }
-
-              
+                         
               if (res.data.ActivityState !== this.state.activityState ){ //Is there a new ActivityState
                 {
                   //alert(res.data.ActivityState);
